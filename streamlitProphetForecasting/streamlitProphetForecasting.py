@@ -1,6 +1,6 @@
 import streamlit as st
 import pandas as pd
-from prophet import Prophet
+from prophet import Prophet #pip install prophet
 import plotly.express as px
 
 # Definimos los parámetros de configuración de la aplicación
