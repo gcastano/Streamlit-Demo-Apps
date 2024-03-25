@@ -25,6 +25,10 @@ dfDatos = pd.read_csv('https://raw.githubusercontent.com/gcastano/datasets/main/
 dfAnoActual = dfDatos[dfDatos['year']==year]
 
 st.subheader('Gráficos de barras simples')
+cols = st.columns(2)
+cols[0].link_button('Ver documentación gráfico de barras en Plotly','https://plotly.com/python/bar-charts/')
+cols[1].link_button('Herramienta de paleta de colores en Plotly','https://plotly-tools.streamlit.app/')
+
 c1,c2,c3 = st.columns(3)
 with c1:
     # Gráfico sin agrupar, muestra datos por categoría pero no son barras completas    
@@ -157,6 +161,7 @@ with c3:
     fig.update_traces(hovertemplate='<b>%{customdata[0]}</b><br>Ingreso anual prom.: $ %{y:,.0f} USD<br>Fertilidad: %{customdata[1]:,.1f} hijos')
     st.plotly_chart(fig,use_container_width=True)
 
+st.subheader('Gráfico de barras separado por una categoría')
 dfEdadPromedio = dfDatos[dfDatos['year']<=year].groupby(['year','continent'])['median_age_year'].mean().reset_index()
 fig = px.bar(dfEdadPromedio,
              x='year',
@@ -176,3 +181,35 @@ fig.update_layout(legend=dict(
 ))
 fig.for_each_annotation(lambda a: a.update(text=a.text.split("=")[1]))
 st.plotly_chart(fig,use_container_width=True)
+
+st.subheader('Gráfico de barras apiladas 100%')
+fig = px.histogram(dfAnoActual.sort_values('population'), x="continent",
+                   y="population", color="country",
+                   barnorm='percent', text_auto=',.2f',
+                   labels={'country':'País','population':'Población','continent':'Continente'},
+                   title="Barras apiladas 100%")
+
+st.plotly_chart(fig,use_container_width=True)
+
+st.subheader('Gráfico de Histograma de Frecuencias')
+st.link_button('Ver documentacion Histogramas Plotly','https://plotly.com/python/histograms/')
+c1,c2= st.columns(2)
+with c1:
+    fig = px.histogram(dfAnoActual.sort_values('lifeExpectancy'), 
+                    x="lifeExpectancy",
+                    labels={'country':'País','population':'Población','continent':'Continente'},
+                    title="Histogramama de Expectativa de vida 2024",
+                    nbins=10,  
+                    )
+    fig.update_layout(bargap=0.2)
+    st.plotly_chart(fig,use_container_width=True)
+with c2:
+    fig = px.histogram(dfAnoActual.sort_values('median_age_year'), 
+                    x="median_age_year",
+                    labels={'country':'País','population':'Población','continent':'Continente'},
+                    title="Histogramama de edades promedio 2024",
+                    nbins=10,  
+                    color='continent'
+                    )
+    fig.update_layout(bargap=0.2)
+    st.plotly_chart(fig,use_container_width=True)
