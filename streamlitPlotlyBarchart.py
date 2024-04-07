@@ -13,9 +13,11 @@ st.set_page_config(
     initial_sidebar_state="expanded"
 )
 
-paleta_discreta= color_discrete_sequence=px.colors.qualitative.D3
-paleta_continua = color_continuous_scale=px.colors.sequential.Jet
+# Definición de paletas de colores
+paleta_discreta= px.colors.carto.Safe
+paleta_continua = px.colors.sequential.Jet
 paleta_personalizada = ['#124076','#7F9F80','#F9E897','#FFC374','#EE99C2','#387ADF']
+
 # Obtenemos año actual
 today = datetime.date.today()
 year = today.year
@@ -34,9 +36,7 @@ with c1:
     # Gráfico sin agrupar, muestra datos por categoría pero no son barras completas    
     fig = px.bar(dfAnoActual, 
                 x='continent',
-                y='population',
-                hover_data=['country','population'],
-                hover_name='continent',
+                y='population',                
                 title='Gráfico de barra sin agrupar sin texto')
     st.plotly_chart(fig,use_container_width=True)
 with c2:
@@ -80,6 +80,7 @@ with c1:
                 y='continent', 
                 text_auto=True,
                 color='population',
+                color_discrete_sequence=paleta_discreta,
                 title='Gráfico de barra agrupado color por valor')
     st.plotly_chart(fig,use_container_width=True)
 with c2:
@@ -90,6 +91,7 @@ with c2:
                 y='population',                 
                 color='continent',
                 text_auto=True,
+                color_discrete_sequence=paleta_discreta,
                 labels={'year':'Año','population':'Población','continent':'Continente'},
                 title='Gráfico de barras apiladas')
     st.plotly_chart(fig,use_container_width=True)
@@ -100,7 +102,7 @@ with c3:
                 y='population', 
                 color='continent',                
                 barmode='group',
-                custom_data=['continent','fertility'],
+                custom_data=['continent','fertility'],                
                 color_discrete_sequence= paleta_personalizada,
                 title='Gráfico de barra agrupado color por categoría y texto')        
     # Se pueden crear plantillas para tooltip que aparece al poner el mouse sobre el gráfico
@@ -129,11 +131,17 @@ with c1:
     fig.update_xaxes(title_text="Años")
 
     # Nombrar y-axes
-    fig.update_yaxes(title_text=" Edad en Años", secondary_y=False)
+    fig.update_yaxes(title_text="Edad en Años", secondary_y=False)
     fig.update_yaxes(title_text="Ingresos anuales promedio USD", secondary_y=True)
     st.plotly_chart(fig,use_container_width=True)    
 with c2:
-    fig = px.bar(dfAnoActual.sort_values('lifeExpectancy',ascending=False),x='country',y='lifeExpectancy',title='Expectativa de vida por país', color='continent',hover_name='continent')
+    fig = px.bar(dfAnoActual.sort_values('lifeExpectancy',ascending=False),
+                 x='country',
+                 y='lifeExpectancy',
+                 title='Expectativa de vida por país',
+                 color='continent',
+                 color_discrete_sequence=paleta_discreta,
+                 hover_name='continent')
     fig.update_traces(hovertemplate='<br>País: %{x}<br>Expectativa de vida: %{y:,.1f} años')
     #Línea horizontal
     fig.add_hline(y=80, #Punto del eje Y donde se desea la línea
@@ -141,7 +149,7 @@ with c2:
               line_dash="dash", #Punteada, sólida o con guiones
               line_color="green", #Color de la línea
               annotation_text="80 años", #Texto asociado a la línea
-              annotation_position="top left" #Positión del texto asociado a la línea
+              annotation_position="top right" #Positión del texto asociado a la línea
               )
     st.plotly_chart(fig,use_container_width=True)    
 with c3:
@@ -168,14 +176,15 @@ fig = px.bar(dfEdadPromedio,
             y='median_age_year',                                                     
             labels={'year':'Año','median_age_year':'Edad promedio en años','continent':'Continente'},
             facet_col='continent',
-            color='continent',
+            color='continent',            
             facet_col_wrap=3,
+            color_discrete_sequence=paleta_discreta,
             height=1000,
             title='Gráfico de barra separado por continente')
 fig.update_layout(legend=dict(
     orientation="h",
-    yanchor="bottom",
-    y=1.02,
+    yanchor="top",
+    y=-0.1,
     xanchor="right",
     x=1
 ))
@@ -187,6 +196,7 @@ fig = px.histogram(dfAnoActual.sort_values('population'), x="continent",
                    y="population", color="country",
                    barnorm='percent', text_auto=',.2f',
                    labels={'country':'País','population':'Población','continent':'Continente'},
+                   color_discrete_sequence=paleta_discreta,
                    title="Barras apiladas 100%")
 
 st.plotly_chart(fig,use_container_width=True)
@@ -200,6 +210,7 @@ with c1:
                     labels={'country':'País','population':'Población','continent':'Continente'},
                     title="Histogramama de Expectativa de vida 2024",
                     nbins=10,  
+                    color_discrete_sequence=paleta_discreta,
                     )
     fig.update_layout(bargap=0.2)
     st.plotly_chart(fig,use_container_width=True)
@@ -209,7 +220,8 @@ with c2:
                     labels={'country':'País','population':'Población','continent':'Continente'},
                     title="Histogramama de edades promedio 2024",
                     nbins=10,  
-                    color='continent'
+                    color='continent',
+                    color_discrete_sequence=paleta_discreta,
                     )
     fig.update_layout(bargap=0.2)
     st.plotly_chart(fig,use_container_width=True)
