@@ -7,7 +7,7 @@ import plotly.graph_objects as go
 
 # Definimos los parámetros de configuración de la aplicación
 st.set_page_config(
-    page_title="Ejemplos de gráficos de Líneas Plotly",
+    page_title="Ejemplos de gráficos diversos Plotly",
     page_icon="📊",
     layout="wide",
     initial_sidebar_state="expanded"
@@ -25,14 +25,14 @@ year = today.year
 # Cargamos el dataframe desde un CSV
 dfDatos = pd.read_csv('https://raw.githubusercontent.com/gcastano/datasets/main/gapminder_data.csv')
 # Campos: continent,country,year,fertility,lifeExpectancy,mean_house_income,median_age_year,population
-dfDatosDecada=dfDatos[(dfDatos['year']<=today.year) & (dfDatos['year']>=today.year-10)]
+# dfDatosDecada=dfDatos[(dfDatos['year']<=today.year) & (dfDatos['year']>=today.year-10)]
 dfAnoActual = dfDatos[dfDatos['year']==year]
 
 data = pd.DataFrame(dict(
         number=[1000000, 800000,600000,100000],
         percent=[1,0.8,0.6,0.1],
         stage=["Etapa 1","Etapa 2","Etapa 3","Etapa 4"]))
-
+# st.dataframe(data)
 st.subheader('Gráficos de embudo o funnel')
 with st.container(border=True):
     parOrientation = st.radio('Orientación',options=['Horizontal','Vertical'],index=0,horizontal=True)
@@ -45,7 +45,7 @@ with st.container(border=True):
         orientation='v'
         campoy='number'
         campox='stage'
-        data=data.sort_values(by='number',ascending=False)
+        # data=data.sort_values(by='number',ascending=False)
 
     col1,col2 = st.columns(2)
     with col1:
@@ -62,7 +62,7 @@ with st.container(border=True):
         # figFunnelGeneral.update_layout(hovermode=False)
         st.plotly_chart(figFunnelGeneral, use_container_width=True)
     with col2:
-        figFunnelGeneral = px.funnel(data, 
+        figFunnelGeneral = px.funnel(data.sort_values(by='number'), 
                                     x=campox, 
                                     y=campoy,
                                     text='number', 
