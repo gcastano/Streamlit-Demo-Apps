@@ -13,13 +13,14 @@ st.set_page_config(
 @st.cache_resource
 def get_pyg_renderer(df) -> "StreamlitRenderer":    
     # If you want to use feature of saving chart config, set `spec_io_mode="rw"`
-    return StreamlitRenderer(df, spec="./gw_config.json", spec_io_mode="rw",hide_data_source_config=False)
+    return StreamlitRenderer(df, spec="./gw_config.json", spec_io_mode="rw")
 
 st.header('Análisis de datos con PyWalker')
 with st.expander('Información de PyWalker'):
     st.link_button('Github','https://github.com/Kanaries/pygwalker')
     st.write('Instalación')
     st.code('pip install pygwalker')
+
 # declaramos el control para cargar archivos
 archivo_cargado = st.file_uploader("Elige un archivo",type=['csv','xlsx'])
 # Si existe un archivo cargado ejecutamos el código
