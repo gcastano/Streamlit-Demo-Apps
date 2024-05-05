@@ -1,0 +1,181 @@
+﻿Country,Rank,EPI Score,10-Year Change
+Norway,1,100,1
+Iceland,1,100,0.9
+United Kingdom,1,100,0.8
+Finland,1,100,0.3
+Netherlands,1,100,-
+Switzerland,1,100,-
+Malta,7,99.8,1.6
+Germany,8,99,0.9
+Luxembourg,9,98.6,2
+Sweden,10,98.5,1.9
+Italy,11,98.2,1.5
+Greece,11,98.2,0.6
+Denmark,13,97.4,2.5
+Ireland,13,97.4,1.7
+Spain,15,96.8,1
+France,16,96.2,4.2
+Japan,17,95,0.9
+Austria,18,94.7,0.9
+Cyprus,19,93.9,1.4
+Belgium,20,93.6,3.6
+Singapore,21,93.2,0.6
+Israel,22,92.8,2.3
+South Korea,23,90.7,2.2
+Canada,24,88,2.2
+Australia,25,87,1.5
+United States of America,26,86.1,1.7
+Brunei Darussalam,27,85.6,1.7
+Portugal,28,83.4,2.6
+New Zealand,29,80.4,2
+Czech Republic,30,76.4,0.4
+Slovenia,31,74.7,0.4
+Taiwan,32,72.4,2.2
+Slovakia,33,71.8,1.7
+Poland,34,71.7,2.1
+Uruguay,35,70.8,5.8
+Croatia,36,70.2,1.8
+Bulgaria,37,68.3,2.6
+Chile,38,68.1,3.2
+Kuwait,39,67.4,2.2
+United Arab Emirates,40,67.2,1.7
+Qatar,41,66.5,2.9
+Costa Rica,42,66.1,4.1
+Montenegro,43,65.6,2.9
+Mauritius,44,65.5,3.5
+Serbia,44,65.5,2.7
+Argentina,46,64.7,3.6
+Jordan,47,62.6,7.2
+Hungary,48,62.2,0.7
+Estonia,49,61.9,1.3
+Bosnia and Herzegovina,50,61.4,3.2
+North Macedonia,51,61.1,2.4
+Belarus,52,60.5,1.4
+Lebanon,53,59.7,5
+China,54,59.4,4.6
+Saudi Arabia,55,59.3,5.9
+Latvia,56,59,1.3
+Oman,57,58.3,3.2
+Lithuania,57,58.3,1
+Malaysia,59,57.6,3.1
+Armenia,60,57.2,0.3
+Bahrain,61,56.6,2.3
+Romania,62,55.9,2.6
+Colombia,63,55.8,5.4
+Thailand,63,55.8,4.5
+Russia,65,55.4,1
+Kazakhstan,66,55.1,3.4
+Ukraine,66,55.1,-0.6
+Bahamas,68,55,0.4
+Albania,69,54,2.5
+Iran,70,53.6,3.7
+Trinidad and Tobago,71,53.4,1.6
+Algeria,72,53.2,3.2
+Mexico,73,52.8,4.3
+Viet Nam,74,52.7,3.7
+Turkey,75,52.6,3.9
+Tunisia,75,52.6,1.9
+Uzbekistan,77,52,1.9
+Barbados,78,51.9,-
+Georgia,79,51.6,2.2
+Seychelles,80,51.4,2.8
+Ecuador,81,50.2,6.2
+Moldova,82,50,1.5
+Antigua and Barbuda,82,50,1
+Iraq,84,49.6,11.1
+Cuba,84,49.6,1.6
+Jamaica,86,49.3,-0.5
+Samoa,87,49.2,1.8
+Sri Lanka,88,48.4,4.4
+Maldives,89,47.8,3.2
+Paraguay,90,47.5,4.5
+Dominica,90,47.5,0.6
+Turkmenistan,92,47.3,7.5
+Grenada,93,47,0.8
+Venezuela,94,46.8,2
+Tonga,95,46.4,0.7
+Brazil,96,46.1,7.2
+Kyrgyzstan,97,45.5,4.5
+Azerbaijan,97,45.5,1.5
+Saint Lucia,99,45.4,0.6
+Panama,100,43.5,6.7
+Saint Vincent and the Grenadines,100,43.5,1.6
+Mongolia,102,43.1,3
+Peru,103,43,1.7
+Nicaragua,104,42.8,6.5
+Belize,105,42.6,2.4
+El Salvador,106,41.6,3.4
+Morocco,107,40.8,8.9
+Bolivia,108,40,5.6
+Suriname,109,39.3,2.9
+Philippines,110,39,7.1
+Dominican Republic,111,38.9,3
+Egypt,112,36.6,8.5
+Cabo Verde,113,35.5,4.1
+Micronesia,113,35.5,1.9
+Guyana,115,35.3,4.9
+Sao Tome and Principe,116,35.2,11
+Fiji,117,34.6,3.3
+Cambodia,118,34.2,7.2
+Equatorial Guinea,119,33.1,9
+Marshall Islands,120,32.2,4.4
+Honduras,121,31.8,6
+Bhutan,122,31.2,4.9
+Tajikistan,123,30.9,6
+Myanmar,124,30.8,9
+Indonesia,125,28.4,6.7
+Guatemala,126,28.2,7
+Afghanistan,127,28,7.1
+Gabon,128,27.6,8.6
+Bangladesh,129,27.3,4.8
+Nepal,130,27,7.3
+Laos,131,26.5,8.9
+Timor-Leste,132,25.9,3.7
+South Africa,133,24.6,7
+Sudan,134,22.3,10
+Vanuatu,135,21.5,2.9
+Botswana,136,20.8,5.7
+Ghana,136,20.8,3.7
+Namibia,138,19.6,5.4
+India,139,19.4,8.9
+Gambia,140,19.1,4.5
+Tanzania,141,18.4,5
+Djibouti,142,18.3,5.2
+Uganda,143,17.6,3.2
+Pakistan,144,17.4,5.2
+Cote d'Ivoire,145,17.2,5.3
+Rwanda,146,16.9,5.7
+Zimbabwe,147,16.8,4.3
+Mozambique,148,16.4,5.3
+Kiribati,149,16.3,4.1
+Papua New Guinea,150,15.5,3.6
+Comoros,151,15.2,3.9
+Republic of Congo,152,14.6,9
+Haiti,153,14,5.9
+Solomon Islands,153,14,4.3
+Mauritania,155,13.6,7.2
+Kenya,155,13.6,6.5
+Dem. Rep. Congo,157,13.5,9.7
+Zambia,158,13.4,6.7
+Benin,158,13.4,4.1
+Senegal,160,13.1,2.5
+Angola,161,12.8,8.9
+Eswatini,162,12.6,5.6
+Malawi,163,12,4.6
+Sierra Leone,164,11.5,4.1
+Guinea,165,11.2,4.6
+Ethiopia,166,10.9,4.8
+Liberia,167,9.8,6.7
+Mali,168,8.2,4.5
+Cameroon,169,7.7,6.3
+Burkina Faso,169,7.7,2.9
+Lesotho,171,7.2,3.6
+Guinea-Bissau,172,6.7,6.4
+Eritrea,173,6.3,4.4
+Madagascar,174,5.9,4.5
+Burundi,175,5.3,3
+Togo,176,5.1,5
+Nigeria,177,4.9,4.9
+Niger,178,1.4,1.4
+Central African Republic,179,-,-
+Chad,179,-,-
