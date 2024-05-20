@@ -4,7 +4,7 @@ import requests
 from bs4 import BeautifulSoup
 
 st.set_page_config(
-    page_title="Site Scraper",
+    page_title="Website Scraper",
     page_icon="💻",    
     initial_sidebar_state="expanded"
 )
@@ -64,7 +64,7 @@ def procesarURLDataFrame(url,nivelMaximo):
         except Exception as e:
             st.error(f'Error: {e}')
 
-st.header('Site scraper 💻')
+st.header('Website scraper 💻')
 parURL= st.text_input("Sitio web a procesar")
 parNivelMaximo= st.number_input("Niveles de análisis",value=2,min_value=1)
 btnIniciar=st.button("Iniciar",type="primary")
@@ -73,7 +73,6 @@ if len(parURL)>0 and btnIniciar:
 
     df = pd.DataFrame()
     links = []
-    texts =[]
     
     with st.status(f"Procesando sitio **{parURL}**") as status:
         with st.container(height=600):
