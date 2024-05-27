@@ -1,7 +1,7 @@
 import streamlit as st
 import pandas as pd
 import requests
-from bs4 import BeautifulSoup
+from bs4 import BeautifulSoup # pip install beautifulsoup4
 
 st.set_page_config(
     page_title="Website Scraper",
@@ -84,7 +84,7 @@ if len(parURL)>0 and btnIniciar:
     st.download_button(
         label="Bajar datos como CSV",
         data=csv,
-        file_name="site_scrapping.csv",
+        file_name="site_scraping.csv",
         mime="text/csv",
     )
     st.dataframe(df)
