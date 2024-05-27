@@ -7,7 +7,7 @@ from folium.plugins import MarkerCluster #Plugin para agrupar marcadores
 
 st.set_page_config(
     page_title="Visor de Mapas en Streamlit",
-    page_icon="💻",  
+    page_icon="🌐",  
     layout='wide',
     initial_sidebar_state="expanded"
 )
@@ -23,11 +23,11 @@ with tab1:
     if parTamano:
         fig = px.scatter_mapbox(dfRestaurantes,lat='latitude',lon='longitude', 
                                 color='rating', hover_name='name',hover_data=['review_count','full_address'],
-                                zoom=10, size='review_count')
+                                zoom=10, size='review_count',height=600)
     else:
         fig = px.scatter_mapbox(dfRestaurantes,lat='latitude',lon='longitude', 
                                 color='rating', hover_name='name',hover_data=['review_count','full_address'],                                
-                                zoom=10)
+                                zoom=10,height=600)
     fig.update_layout(mapbox_style=parMapa)
     st.plotly_chart(fig,use_container_width=True)
 with tab2:
@@ -40,7 +40,7 @@ with tab2:
     st.dataframe(df)
 with tab3:
     parTipoMapa = st.radio('Tipo de marcadores',options=['Cluster','Individuales'],horizontal=True)
-    m = folium.Map(location=[6.242827227796505, -75.6132478], zoom_start=10)
+    m = folium.Map(location=[6.242827227796505, -75.6132478], zoom_start=15)
     if parTipoMapa=='Cluster':
         marker_cluster = MarkerCluster().add_to(m)
 
@@ -61,6 +61,7 @@ with tab3:
         force_separate_button=True,
     ).add_to(m)
     out = st_folium(m, height=600,use_container_width=True)
+    st.write(out)
 with tab4:
     st.dataframe(dfRestaurantes,use_container_width=True)
 
