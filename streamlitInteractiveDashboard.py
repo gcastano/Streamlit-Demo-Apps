@@ -15,6 +15,8 @@ st.set_page_config(
     initial_sidebar_state="expanded"
 )
 
+color_discrete_sequence=px.colors.carto.Safe
+
 # Carga de dataframe
 @st.cache_data
 def cargarDatos():
@@ -67,20 +69,20 @@ st.markdown(f'{textoFiltros}')
 c1,c2,c3 = st.columns(3)
 with c1:
     # Gráfico de unidades vendidas por mes
-    figMes = px.bar(dfDatosCantidad,x='mes',y='Cantidad',title='Unidades por Mes')
+    figMes = px.bar(dfDatosCantidad,x='mes',y='Cantidad',title='Unidades por Mes',color_discrete_sequence=color_discrete_sequence)
     # on_select="rerun" hace que por cada clic reinicia la app
     parMes = st.plotly_chart(figMes,on_select="rerun")
     with st.expander('Puntos Mes'):
         st.write(parMes)
 with c2:
     # Gráfico de unidades vendidas por ciudad
-    figCiudad = px.bar(dfDatosCiudad,x='ciudad',y='Cantidad',color='ciudad',title='Unidades por Ciudad')
+    figCiudad = px.bar(dfDatosCiudad,x='ciudad',y='Cantidad',color='ciudad',title='Unidades por Ciudad',color_discrete_sequence=color_discrete_sequence)
     parCiudad = st.plotly_chart(figCiudad,on_select="rerun")
     with st.expander('Puntos Ciudad'):
         st.write(parCiudad)
 with c3:
     # Gráfico scatter de porcentaje de utilidad vs precio
-    figScatter = px.scatter(dfDatos,x='util_porcent',y='precio',color='producto',title='Precio vs Utilidad %')
+    figScatter = px.scatter(dfDatos,x='util_porcent',y='precio',color='producto',title='Precio vs Utilidad %',color_discrete_sequence=color_discrete_sequence)
     # Indicamos que el eje X es en porcentaje
     figScatter.layout.xaxis.tickformat = ',.1%'    
     parScatter = st.plotly_chart(figScatter,on_select="rerun")
@@ -112,12 +114,21 @@ st.divider()
 # Mostramos la gráfica dependiendo de las selecciones de los charts
 with st.container():
     st.write(textoFiltros)
-    if len(parScatter.selection.points)>0:
-        dfDatosGrupo=dfDatos.groupby(['mes','ciudad','producto'])['Cantidad'].sum().reset_index()
-        altoChart=len(parScatter.selection.points)*2
-        figVentas=px.line(dfDatosGrupo,x='mes',y='Cantidad',color='producto',facet_row='ciudad',height=altoChart) 
+    if len(parMes.selection.points)>1 or len(parMes.selection.points)==0:
+        if len(parScatter.selection.points)>0:
+            dfDatosGrupo=dfDatos.groupby(['mes','ciudad','producto'])['Cantidad'].sum().reset_index()
+            altoChart=len(parScatter.selection.points)*2
+            figVentas=px.line(dfDatosGrupo,x='mes',y='Cantidad',color='producto',facet_row='ciudad',color_discrete_sequence=color_discrete_sequence,facet_row_spacing =0.04) 
+        else:
+            dfDatosGrupo=dfDatos.groupby(['mes','ciudad'])['Cantidad'].sum().reset_index()
+            figVentas=px.line(dfDatosGrupo,x='mes',y='Cantidad',color='ciudad',color_discrete_sequence=color_discrete_sequence)     
     else:
-        dfDatosGrupo=dfDatos.groupby(['mes','ciudad'])['Cantidad'].sum().reset_index()
-        figVentas=px.line(dfDatosGrupo,x='mes',y='Cantidad',color='ciudad') 
+        if len(parScatter.selection.points)>0:
+            dfDatosGrupo=dfDatos.groupby(['mes','ciudad','producto'])['Cantidad'].sum().reset_index()
+            altoChart=len(parScatter.selection.points)*2
+            figVentas=px.bar(dfDatosGrupo,x='mes',y='Cantidad',color='producto',facet_row='ciudad',color_discrete_sequence=color_discrete_sequence,facet_row_spacing =0.04,barmode='group') 
+        else:
+            dfDatosGrupo=dfDatos.groupby(['mes','ciudad'])['Cantidad'].sum().reset_index()
+            figVentas=px.bar(dfDatosGrupo,x='mes',y='Cantidad',color='ciudad',color_discrete_sequence=color_discrete_sequence,barmode='group')             
     st.plotly_chart(figVentas,use_container_width=True)
 
