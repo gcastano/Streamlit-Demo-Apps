@@ -4,3 +4,4 @@ streamlitValidadorEmail/DIRECTORIO_DE__CORREOS_INSTITUCIONAL_20240608.csv
 streamlitValidadorEmail/.streamlit/secrets.toml
 streamlitAgGrid.py
 basicDashboard.py
+streamlitLogin/__pycache__/login.cpython-311.pyc
