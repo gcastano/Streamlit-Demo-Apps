@@ -100,8 +100,8 @@ with cols[0]:
         paleta=px.colors.sequential.Aggrnyl_r
 
     fig1 = px.choropleth(df, locations="iso_alpha",
-                    color="gdpPercap", # lifeExp is a column of gapminder
-                    hover_name="country", # column to add to hover information
+                    color="gdpPercap", 
+                    hover_name="country", 
                     color_continuous_scale=paleta,
                     title="Mapa de calor con paleta de plotly")
     st.plotly_chart(fig1)
@@ -113,16 +113,16 @@ with cols[1]:
         paleta=paletaContinuaPersonalizada[::-1]
     
     fig2 = px.choropleth(df, locations="iso_alpha",
-                        color="pop", # lifeExp is a column of gapminder
-                        hover_name="country", # column to add to hover information
+                        color="pop", 
+                        hover_name="country", 
                         color_continuous_scale=paleta,
                         title="Mapa con paleta personalizada 3 colores")
     st.plotly_chart(fig2)
 with cols[2]:            
     # Mapa de calor con paleta personalizada en colores y rangos
     fig3 = px.choropleth(df, locations="iso_alpha",
-                    color="lifeExp", # lifeExp is a column of gapminder
-                    hover_name="country", # column to add to hover information
+                    color="lifeExp", 
+                    hover_name="country", 
                     color_continuous_scale=paletaContinuaPersonalizadaRangos2,
                     title="Mapa con paleta personalizada 4 rangos y segementos personalizados")
     st.plotly_chart(fig3)
