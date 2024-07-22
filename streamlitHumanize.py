@@ -111,5 +111,5 @@ with c2:
     st.subheader('Formatos Humanize')
     st.metric('Valor naturaltime',humanize.naturaltime(parFechaHora))
     st.metric('Valor precisedelta simple',humanize.precisedelta(parFechaHora,format='%0.2f'))
-    st.metric('Valor precisedelta sin segundos',humanize.precisedelta(parFechaHora,format='%0.2f',minimum_unit='hours'))
+    st.metric('Valor precisedelta sin segundos',humanize.precisedelta(parFechaHora,format='%0.2f',minimum_unit='minutes'))
     
