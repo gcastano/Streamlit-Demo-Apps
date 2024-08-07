@@ -177,14 +177,14 @@ with columnas[2]:
     st.metric('Terminations',f'{empTerminadosTrimestre:,.2f}','Last 3 months',delta_color='off')
     st.metric('Span of Control',f'{empSpanofControl:,.1f}')
 with columnas[3]:
-    st.plotly_chart(utils.aplicarFormatoChart(figEmpXDept,legend=True),use_container_width=True)
+    st.plotly_chart(figEmpXDept,use_container_width=True)
 with columnas[4]:
-    st.plotly_chart(utils.aplicarFormatoChart(figEmpAge,legend=True),use_container_width=True)
+    st.plotly_chart(figEmpAge,legend=True,use_container_width=True)
 st.divider()
 st.subheader(':blue[Hires and terminations]')
 c1,c2,c3= st.columns([4,3,4])
 with c1:
-    st.plotly_chart(utils.aplicarFormatoChart(figHireTerminations,legend=True),use_container_width=True)
+    st.plotly_chart(figHireTerminations,use_container_width=True)
 with c2:
     st.plotly_chart(figTerminations,use_container_width=True)
 with c3:
