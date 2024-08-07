@@ -99,7 +99,7 @@ if btnGenerar:
             messages=[
                 {
                     "role": "system",
-                    "content": "Vas a ser un periodista experto en redacción para medios digitales, enfocado en ser concreto y consiso, cuando el usuario te envíe un texto llamado transcripción de video, vas a sacar un resumen en español de máximo 1500 caracteres, con las ideas, fechas, nombres y cifras más importantes"
+                    "content": "Vas a ser un periodista experto en redacción para medios digitales, enfocado en ser concreto y conciso, cuando el usuario te envíe un texto llamado transcripción de video, vas a sacar un resumen en español de máximo 1500 caracteres, con las ideas, fechas, nombres y cifras más importantes"
                 },
                 {
                     "role": "user",
