@@ -7,3 +7,4 @@ basicDashboard.py
 streamlitLogin/__pycache__/login.cpython-311.pyc
 StreamlitPeopleAnalytics/__pycache__/utils.cpython-311.pyc
 streamlitYouTubeResumen/.streamlit/secrets.toml
+secrets.toml
