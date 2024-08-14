@@ -14,8 +14,13 @@ st.set_page_config(
 today = datetime.today().strftime("%Y")
 
 # Cargamos librerías de MaterializeCSS, Material Icons y Font Awesome
+
+
+# https://materializecss.com/
 st.markdown('<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">', unsafe_allow_html=True)
+# https://materializecss.com/icons.html
 st.markdown('<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">', unsafe_allow_html=True)
+# https://fontawesome.com/start
 st.markdown('<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" rel="stylesheet">', unsafe_allow_html=True)
 
 # Adicionamos estilos personalizados para mejorar el diseño
@@ -43,9 +48,11 @@ customStyle ="""
 st.html(customStyle)
 
 # Cargamos la API Keu
-AIRTABLE_API_KEY = st.secrets.AIRTABLE_API_KEY
+AIRTABLE_API_KEY = st.secrets.AIRTABLE_API_KEY # Crea el token en este enlace https://airtable.com/create/tokens
+
+
 # Seleccionamos el base id de Airtable
-AIRTABLE_BASE_ID='appEBN5hR96QYDdrn'
+AIRTABLE_BASE_ID='Airtable base id' #Copia la plantilla de este enlace https://airtable.com/appv1dCIP9oXJOXFE/shruOGxFeklRDFp0i/tblIBw5i2w5geQhQc/viwOxM9R5nUpGo3ZO?blocks=hide
 
 # Creamos el objeto de Airtable
 api = Api(AIRTABLE_API_KEY)
@@ -80,7 +87,7 @@ profileHTML=f"""
                 <div class="row">                    
                     <div class="col s12 m2">
                         <img class="circle responsive-img" src="{picture}">
-                        </div>
+                    </div>
                         <div class="col s12 m10 ">
                             <span class="card-title">About me</span>
                             <p>{profileDescription}</p>
@@ -113,14 +120,19 @@ with tabSkils:
         skillDescription = skill['Notes']    
         skillLevel = skill['Level']
         skillStars=""
+        # Creación de rating con estrellas
         for i in range(1,6):
             if i<=skillLevel:
+                # Estrella completa
                 skillStars=skillStars+'<i class="material-icons">star</i>'
             else:
+                # Estrella vacía
                 skillStars=skillStars+'<i class="material-icons">star_border</i>'
                 
         skillYears = skill['startYear']   
+        # Cálculo de años de experiencia
         skillExperience = int(today) -int(skillYears)
+        # Plantilla del card de skill
         skillHTML = f"""                    
                 <div class="col s12 m4">
                     <div class="card small">
@@ -133,7 +145,7 @@ with tabSkils:
                                 <p>Level:<br/> {skillStars}</p>
                             </div>
                             <div class="col s12 m6">
-                                <p fon>Since:<br/> {skillYears} - {skillExperience} years</p>
+                                <p fon>Since:<br/> {skillYears} - More than {skillExperience} years</p>
                             </div>
                         </div>
                     </div>
@@ -168,6 +180,7 @@ with tabPortfolio:
         
         projectLink = project['link'] 
         projectImageUrl = project['image'][0]['url']        
+        # Plantilla de proyectos
         projectHTML = f"""                    
                 <div class="col s12 m6">
                     <div class="card large">                    
@@ -211,6 +224,7 @@ with tabContact:
         parNotes = st.text_area("What can I do for you")
         btnEnviar = st.button("Send",type="primary")
     if btnEnviar:
+        # Creamos el registro de contactos
         tblContacts.create({"Name":parName,"email":parEmail,"phoneNumber":parPhoneNumber,"Notes":parNotes})
         st.toast("Message sent")
 st.markdown('<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>', unsafe_allow_html=True)
