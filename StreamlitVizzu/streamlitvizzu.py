@@ -609,7 +609,7 @@ agesMin = df[df['age'].astype(int)>0]['age'].min()
 agesMax = df[df['age'].astype(int)>0]['age'].max()
 cols = st.columns([2,10,2])
 with cols[0]:
-    st.image("Logo_Paris2024_OlyEmbleme.png")
+    st.image("https://raw.githubusercontent.com/gcastano/Streamlit-Demo-Apps/main/StreamlitVizzu/Logo_Paris2024_OlyEmbleme.png")
     st.info("Created with ❤️ by [Germán Andrés Castaño Vásquez](https://www.linkedin.com/in/germancastano/) using [Streamlit](https://streamlit.io/), [Vizzu](https://www.vizzu.io/) and a dataset from [Kaggle](https://www.kaggle.com/datasets/sajkazmi/paris-olympics-2024-games-dataset-updated-daily)")    
 with cols[1]:
     story.play()
