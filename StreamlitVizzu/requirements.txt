@@ -1,0 +1,4 @@
+ipyvizzu
+pandas==1.5.2
+streamlit==1.36.0
+ipyvizzu-story
