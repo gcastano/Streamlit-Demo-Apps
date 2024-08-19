@@ -51,7 +51,7 @@ d_types = {
 
 
 # Cargamos los datos descargados de https://www.kaggle.com/datasets/sajkazmi/paris-olympics-2024-games-dataset-updated-daily
-df = pd.read_csv("medallists.csv", parse_dates=['birth_date','medal_date'],dtype=d_types)
+df = pd.read_csv("https://raw.githubusercontent.com/gcastano/Streamlit-Demo-Apps/main/StreamlitVizzu/medallists.csv", parse_dates=['birth_date','medal_date'],dtype=d_types)
 
 # Calculamos la edad de los medallistas
 df["age"]=((df["medal_date"] - df["birth_date"]).dt.days/365.25).fillna(0)
