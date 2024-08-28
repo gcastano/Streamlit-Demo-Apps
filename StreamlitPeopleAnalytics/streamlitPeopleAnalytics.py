@@ -154,7 +154,7 @@ figSalarioSexo =utils.aplicarFormatoChart(figSalarioSexo,legend=True,titulo="Sal
 
 # Tablero
 
-st.header('People Analytics Dashboard - :blue[Company Inc.]')
+st.header('People Analytics Dashboard - :blue[Company Incorporated]')
 
 with st.expander('Data'):    
     st.dataframe(dfDatosHR)
