@@ -1,4 +1,0 @@
-ipyvizzu
-pandas
-streamlit
-ipyvizzu-story
