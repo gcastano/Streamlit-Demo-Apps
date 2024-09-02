@@ -1,0 +1,4 @@
+langchain_experimental==0.0.64
+langchain_groq==0.1.9
+pandas==1.5.2
+streamlit==1.36.0
