@@ -1189,7 +1189,7 @@ story.add_slide(
 # Encabezado
 cols = st.columns([2,10,2])
 with cols[0]:
-    st.image("Paris2024_Paralympics_Emblem.jpg")
+    st.image("https://raw.githubusercontent.com/gcastano/Streamlit-Demo-Apps/main/StreamlitVizzu/Paris2024_Paralympics_Emblem.jpg")
     st.info("Created with ❤️ by [Germán Andrés Castaño Vásquez](https://www.linkedin.com/in/germancastano/) using [Streamlit](https://streamlit.io/), [Vizzu](https://www.vizzu.io/) and a dataset from [Kaggle](https://www.kaggle.com/datasets/sajkazmi/paris-olympics-2024-games-dataset-updated-daily)")    
 with cols[1]:
     st.subheader("Paralympics")
