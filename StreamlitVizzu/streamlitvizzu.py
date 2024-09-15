@@ -614,7 +614,7 @@ with cols[0]:
     st.image("https://raw.githubusercontent.com/gcastano/Streamlit-Demo-Apps/main/StreamlitVizzu/Logo_Paris2024_OlyEmbleme.png")
     st.info("Created with ❤️ by [Germán Andrés Castaño Vásquez](https://www.linkedin.com/in/germancastano/) using [Streamlit](https://streamlit.io/), [Vizzu](https://www.vizzu.io/) and a dataset from [Kaggle](https://www.kaggle.com/datasets/sajkazmi/paris-olympics-2024-games-dataset-updated-daily)")    
 with cols[1]:
-    st.subheader("Olimpics")
+    st.subheader("Olympics")
     story.play()
     st.info("Click on the play button to see every slide...enjoy 😁")
 with cols[2]:
