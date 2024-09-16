@@ -3,7 +3,8 @@ import face_recognition #pip install face_recognition
 import cv2 # pip install cv2
 import numpy as np
 from PIL import Image, ImageDraw # pip install PIL
-import os 
+import os
+
 # Definimos los parámetros de configuración de la aplicación
 st.set_page_config(
     page_title="Reconocimiento facial", #Título de la página
@@ -77,7 +78,7 @@ if archivo_cargado is not None:
     
     for face_location in face_locations:        
         # Generamos la ubicación la cada en esta imagen
-        top, right, bottom, left = face_location        
+        top, right, bottom, left = face_location
 
         # Puedes acceder a la cara real así
         face_image = image[top:bottom, left:right]
@@ -115,4 +116,3 @@ if archivo_cargado is not None:
     with c4:
         # Ejecutamos la búsqueda de rostro
         identificarRostro(image)
-    
