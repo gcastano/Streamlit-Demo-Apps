@@ -1,0 +1,5 @@
+iteration_utilities==0.12.1
+pandas==1.5.2
+Requests==2.32.3
+st_annotated_text==3.0.0
+streamlit==1.38.0
