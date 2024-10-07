@@ -2,8 +2,11 @@
 import requests
 import streamlit as st
 import pandas as pd
-from annotated_text import annotated_text,annotation
-from iteration_utilities import unique_everseen
+from annotated_text import annotated_text,annotation # https://github.com/tvst/st-annotated-text
+from iteration_utilities import unique_everseen # https://pypi.org/project/iteration-utilities/
+
+
+
 
 # Configuración de la página de Streamlit
 st.set_page_config(
@@ -16,11 +19,12 @@ st.set_page_config(
 # Obtención de la API key de Hugging Face desde secrets.toml de Streamlit
 HUGGINGFACE_API = st.secrets["HUGGINGFACE_API"]
 
-# Lista de modelos disponibles para el análisis de entidades
+# Lista de modelos disponibles para el análisis de entidades tomados de Hugging Face    https://huggingface.co/
 modelos=["MMG/xlm-roberta-large-ner-spanish",
         "dslim/bert-base-NER",
         "51la5/roberta-large-NER",
-        "FacebookAI/xlm-roberta-large-finetuned-conll03-english"]
+        "FacebookAI/xlm-roberta-large-finetuned-conll03-english",
+        "Babelscape/wikineural-multilingual-ner"]
 
 # Configuración de los headers para la API de Hugging Face
 headers = {"Authorization": f"Bearer {HUGGINGFACE_API}"}
@@ -68,8 +72,7 @@ with c2:
                 textoAnotado.append(annotation(entidad["word"],entidad["entity_group"]))
                 posicionAnterior=entidad["end"]
             textoSimple=parTexto[posicionAnterior:] 
-            textoAnotado.append(textoSimple)
-            
+            textoAnotado.append(textoSimple)            
             st.subheader("Resultado")
             annotated_text(*textoAnotado)
         
