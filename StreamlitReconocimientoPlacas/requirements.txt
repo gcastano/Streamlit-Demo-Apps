@@ -1,0 +1,11 @@
+easyocr==1.7.2
+imutils==0.5.4
+matplotlib==3.6.3
+numpy==2.1.2
+opencv_contrib_python==4.7.0.72
+opencv_python==4.7.0.72
+opencv_python_headless==4.10.0.84
+Pillow==9.3.0
+Pillow==10.4.0
+rembg==2.0.59
+streamlit==1.38.0
