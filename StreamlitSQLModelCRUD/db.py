@@ -58,7 +58,6 @@ DB_NAME=config["postgres"]["DB_NAME"]
 
 # Creación del motor de la base de datos
 engine = create_engine(f'postgresql+psycopg2://{DB_USERNAME}:{DB_PASSWORD}@{DB_URL}:{DB_PORT}/{DB_NAME}')#, echo=True)
-# postgres://avnadmin:AVNS_hVCOUzAC3Qbp5wqR_4t@sandboxdb-postgres-tutorials.f.aivencloud.com:23936/defaultdb?sslmode=require
 # Creación de la sesión de la base de datos
 session = Session(engine)
 
