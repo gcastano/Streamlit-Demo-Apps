@@ -35,7 +35,7 @@ class SurveyResponse(SQLModel, table=True):
     salary: float
     main_skills: str
     submitted_at: datetime = Field(default=datetime.utcnow)
-
+ 
 
     # Relación con la tabla Role, una respuesta pertenece a un rol
     role: Role = Relationship(back_populates="responses")
