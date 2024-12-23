@@ -1,40 +1,57 @@
 # Importamos las librerías necesarias
-import streamlit as st  # Librería para crear aplicaciones web interactivas
-import pandas as pd  # Librería para manipulación y análisis de datos
-import plotly.express as px  # Librería para crear gráficos interactivos
-import requests  # Librería para hacer solicitudes HTTP
-import json  # Librería para trabajar con datos en formato JSON
+
+# streamlit: Librería para crear aplicaciones web interactivas.
+# Instalación: pip install streamlit
+import streamlit as st
+
+# pandas: Librería para manipulación y análisis de datos.
+# Instalación: pip install pandas
+import pandas as pd
+
+# plotly.express: Librería para crear gráficos interactivos.
+# Instalación: pip install plotly
+import plotly.express as px
+
+# requests: Librería para hacer solicitudes HTTP.
+# Instalación: pip install requests
+import requests
+
+# json: Librería para trabajar con datos en formato JSON.
+# Instalación: pip install json # aunque normalmente viene preinstalada con python
+import json
 
 # Definimos los parámetros de configuración de la aplicación
 st.set_page_config(
-    page_title="Monitoreo de Metricas", #Título de la página
-    page_icon="📊", # Ícono
-    layout="wide", # Forma de layout ancho o compacto
-    initial_sidebar_state="expanded" # Definimos si el sidebar aparece expandido o colapsado
+    page_title="Monitoreo de Metricas",  # Título de la página
+    page_icon="📊",  # Ícono
+    layout="wide",  # Forma de layout ancho o compacto
+    initial_sidebar_state="expanded"  # Definimos si la barra lateral aparece expandida o colapsada
 )
 
 # Función para enviar un mensaje de WhatsApp usando la API de 2Chat
 def enviarMensajeWhatsApp(mensaje):
     """
     Envía un mensaje de WhatsApp utilizando la API de 2Chat.
+
     Args:
         mensaje (str): El contenido del mensaje a enviar.
+
     Returns:
         None
     """
     url = "https://api.p.2chat.io/open/whatsapp/send-message"
 
     payload = json.dumps({
-      "to_number": st.secrets["telefonoMonitoreo"], # Número de teléfono de destino
-      "from_number": st.secrets["telefonoOrigen"], # Número de teléfono de origen
-      "text": mensaje,      
+        "to_number": st.secrets["telefonoMonitoreo"],  # Número de teléfono de destino (configurado en los secretos de Streamlit)
+        "from_number": st.secrets["telefonoOrigen"],  # Número de teléfono de origen (configurado en los secretos de Streamlit)
+        "text": mensaje,
     })
     headers = {
-      'X-User-API-Key': st.secrets["2ChatAPIKey"], # API Key para autenticación
-      'Content-Type': 'application/json'
+        'X-User-API-Key': st.secrets["2ChatAPIKey"],  # API Key para autenticación (configurado en los secretos de Streamlit)
+        'Content-Type': 'application/json'
     }
 
-    response = requests.request("POST", url, headers=headers, data=payload)    
+    response = requests.request("POST", url, headers=headers, data=payload)
 
 # Función para generar una alerta si el valor de la medida está fuera del rango
 def generarAlerta(valorMedida, parMinMonitoreo, parMaxMonitoreo):
@@ -52,7 +69,7 @@ def generarAlerta(valorMedida, parMinMonitoreo, parMaxMonitoreo):
     if valorMedida < parMinMonitoreo:
         mensaje = f"🔴 *ALERTA:* El valor de la medida es {valorMedida} y es menor que el valor mínimo de {parMinMonitoreo}"
     elif valorMedida > parMaxMonitoreo:
-        mensaje = f"🔴 *ALERTA:* El valor de la medida es {valorMedida} y es mayor al valor máximo de {parMaxMonitoreo}"        
+        mensaje = f"🔴 *ALERTA:* El valor de la medida es {valorMedida} y es mayor al valor máximo de {parMaxMonitoreo}"
     enviarMensajeWhatsApp(mensaje)
 
 # Configuración de los parámetros en la barra lateral
@@ -71,18 +88,17 @@ if "ultimoValorEnAlerta" not in st.session_state:
     st.session_state.ultimoValorEnAlerta = False
 
 # Función para actualizar los datos periódicamente
-@st.fragment(run_every=parSegundosActualizacion)
+@st.fragment(run_every=parSegundosActualizacion)  # Decorador para ejecutar la función cada cierto tiempo
 def ActualizarDatos(parMinMonitoreo, parMaxMonitoreo, parVentanaDatos):
-    gsheetid = '10bSRhhhD4ZibrRjUZyIWu-Uo2f5dH6ZeL8RrlKHKbQ8'
-    sheetid = '0'
-    url = f'https://docs.google.com/spreadsheets/d/{gsheetid}/export?format=csv&gid={sheetid}&format'
+    gsheetid = '10bSRhhhD4ZibrRjUZyIWu-Uo2f5dH6ZeL8RrlKHKbQ8'  # ID de la hoja de cálculo de Google Sheets
+    sheetid = '0'  # ID de la hoja dentro del documento
+    url = f'https://docs.google.com/spreadsheets/d/{gsheetid}/export?format=csv&gid={sheetid}&format'  # URL para descargar los datos en formato CSV
     try:
-        dfDatos = pd.read_csv(url).tail(parVentanaDatos) # Cargar los datos de la hoja de cálculo
+        dfDatos = pd.read_csv(url).tail(parVentanaDatos)  # Cargar los datos de la hoja de cálculo y tomar los últimos 'parVentanaDatos' registros
     except Exception as e:
-        st.error(f"Error al cargar los datos: {e}")
+        st.error(f"Error al cargar los datos: {e}")  # Mostrar un mensaje de error si hay problemas al cargar los datos
         return
 
-    
     # Crear una gráfica de línea con los datos
     fig = px.line(dfDatos, x='FechaHora', y='Medida', markers=True)  # Crear la gráfica de línea con marcadores
     fig.add_hrect(y0=parMinMonitoreo, y1=parMaxMonitoreo, fillcolor="#DAFFFB", line_color="rgba(0,0,0,0)", opacity=0.5)  # Añadir una banda horizontal para el rango permitido
@@ -99,18 +115,18 @@ def ActualizarDatos(parMinMonitoreo, parMaxMonitoreo, parVentanaDatos):
     # Validamos que la última fecha sea diferente a la última fecha almacenada en el estado de la sesión
     if ultimaFecha != st.session_state.ultimaFecha:
         st.session_state.ultimaFecha = ultimaFecha  # Actualizar la última fecha en el estado de la sesión
-        
+
         # Verificar si el valor de la medida está fuera del rango permitido
         if valorMedida < parMinMonitoreo or valorMedida > parMaxMonitoreo:
             st.session_state.ultimoValorEnAlerta = True  # Marcar que hay una alerta activa
             generarAlerta(valorMedida, parMinMonitoreo, parMaxMonitoreo)  # Generar la alerta y enviar el mensaje de WhatsApp
-        
+
         # Si el valor de la medida vuelve al rango normal y había una alerta activa, enviar mensaje de resolución
         else:
             if st.session_state.ultimoValorEnAlerta:
                 st.session_state.ultimoValorEnAlerta = False  # Marcar que la alerta ha sido resuelta
                 mensaje = f"✅ *ALERTA RESUELTA:* El valor de la medida ha vuelto al rango normal."
                 enviarMensajeWhatsApp(mensaje)  # Enviar el mensaje de resolución de alerta
-    
+
 # Llamar a la función para actualizar los datos
 ActualizarDatos(parMinMonitoreo, parMaxMonitoreo, parVentanaDatos)
