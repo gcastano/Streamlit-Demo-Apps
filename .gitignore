@@ -12,3 +12,4 @@ streamlitChatPDF/ESTADISTICA.pdf
 streamlitChatPDF/chatbotTest.py
 StreamlitMistralAI/*.jp*
 StreamlitMistralAI/*.png
+*.pyc
