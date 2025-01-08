@@ -1,6 +1,10 @@
 # Importamos las librerías necesarias
 import streamlit as st  # Librería para crear aplicaciones web interactivas. Instalación: pip install streamlit
 import pandas as pd  # Librería para manipulación y análisis de datos. Instalación: pip install pandas
+from streamlit_cookies_controller import CookieController # Librería para manejar cookies en Streamlit. Instalación: pip install streamlit-cookies-controller
+
+# Creamos una instancia de CookieController
+controller = CookieController()
 
 # Validación simple de usuario y clave con un archivo csv
 
@@ -134,12 +138,20 @@ def generarMenuRoles(usuario):
         btnSalir=st.button("Salir")
         if btnSalir:
             st.session_state.clear()
+            controller.remove('usuario')
             st.rerun()
 
 # Generación de la ventana de login y carga de menú
 def generarLogin(archivo):
     """Genera la ventana de login o muestra el menú si el login es valido
     """    
+    
+    # Obtenemos el usuario de la cookie
+    usuario = controller.get('usuario')    
+    # Validamos si el usuario ya fue ingresado
+    if usuario:
+        # Si ya hay usuario en el cookie, lo asignamos al session state
+        st.session_state['usuario'] = usuario
     # Validamos si el usuario ya fue ingresado    
     if 'usuario' in st.session_state: # Verificamos si la variable usuario esta en el session state
         
@@ -160,6 +172,8 @@ def generarLogin(archivo):
             if btnLogin: # Verificamos si se presiono el boton ingresar
                 if validarUsuario(parUsuario,parPassword): # Verificamos si el usuario y la clave existen
                     st.session_state['usuario'] =parUsuario # Asignamos la variable de usuario
+                    # Set a cookie
+                    controller.set('usuario', parUsuario)
                     # Si el usuario es correcto reiniciamos la app para que se cargue el menú
                     st.rerun() # Reiniciamos la aplicación
                 else:
