@@ -1,0 +1,3 @@
+pandas==1.5.3
+streamlit==1.40.1
+streamlit_cookies_controller==0.0.4
