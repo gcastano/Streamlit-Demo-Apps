@@ -3,7 +3,13 @@ import streamlit as st  # Para crear la interfaz web. Instalar con: pip install 
 import pandas as pd  # Para manipular datos. Instalar con: pip install pandas
 
 # Cargar el archivo CSV con los datos de días festivos
-dfHolidays = pd.read_csv("WorldHolidays.csv", sep=";")
+
+# Carga local
+# dfHolidays = pd.read_csv("WorldHolidays.csv", sep=";")
+
+#Carga desde repositorio de GitHub
+dfHolidays = pd.read_csv("https://raw.githubusercontent.com/gcastano/Streamlit-Demo-Apps/refs/heads/main/StreamlitCalculadoraFreelance/WorldHolidays.csv", sep=";")
+
 
 # Configurar la página de Streamlit
 st.set_page_config(page_title="Calculadora Freelance", layout="wide")
@@ -42,11 +48,7 @@ st.html(
 
 # Mostrar el encabezado
 st.header(":blue[:material/request_quote:] Calculadora Freelance")
-
-# Función para actualizar los festivos en la sesión
-def actualizarFestivos(valor):
-    if "festivos" not in st.session_state:
-        st.session_state.festivos = valor
+st.info("Creada con ♥️ por: [Germán Castaño](https://www.linkedin.com/in/gcastano/) | Video en :material/youtube_activity:: [El Loco de los Datos](https://youtu.be/9ZtMKl-Qrqo?si=25ty5fuJIYs7X8bM) | :material/local_cafe:    Apoya el canal: https://ko-fi.com/eldld")
 
 with st.container(border=True,key="parametros"):
     # Crear columnas para los inputs
@@ -69,7 +71,7 @@ with st.container(border=True,key="parametros"):
     c1, c2 = st.columns(2)
 
     # Input para días de vacaciones
-    pardias_vacaciones = c1.number_input(":blue[:material/beach_access:] Días de vacaciones", min_value=1, value=15, key="input-vacaciones")
+    pardias_vacaciones = c1.number_input(":blue[:material/beach_access:] Días de vacaciones", min_value=0, value=15, key="input-vacaciones")
 
     # Input para días de incapacidad o permisos
     pardias_incapacidad_permisos = c2.number_input(":blue[:material/medical_information:] Días incapacidad o permisos", min_value=0, max_value=24, value=8, key="input-incapacidad-permisos", help="Son días que estimas no trabajar por enfermedad o actividades personales")
