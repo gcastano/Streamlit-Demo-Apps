@@ -1,0 +1,28 @@
+div[data-testid="stVerticalBlockBorderWrapper"] div div div:has(div.st-key-panel-parametros),
+div[data-testid="stVerticalBlockBorderWrapper"] div div div:has(div.st-key-panel-analisis)
+{
+    background-color:white
+}
+div[data-testid="stVerticalBlockBorderWrapper"] div div div:has(div.st-key-ecuacion),
+div[data-testid="stVerticalBlockBorderWrapper"] div div div:has(div.st-key-resultados)
+{
+    background-color:white
+}
+div[data-baseweb="tab-list"] p,
+label[data-testid="stMetricLabel"] p, /*Para la etiqueta de las métricas*/
+label[data-testid="stWidgetLabel"] p /*Para la etiqueta de los input*/
+{
+    font-size: 20px;
+}
+
+div[data-testid="stMetricValue"]{
+    font-weight:bold;
+    color: #7393b1;
+}
+
+div[class*='st-key-chart']
+{
+    /* border: 1px solid grey; */
+    overflow:hidden;
+    border-radius: 10px;        
+}
