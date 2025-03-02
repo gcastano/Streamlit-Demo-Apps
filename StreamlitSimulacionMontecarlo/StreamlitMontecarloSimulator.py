@@ -180,7 +180,7 @@ with st.container(border=True, key="panel-analisis"):
             with c1:
                 # Calcula el histograma para la variable resultado
                 count, division = np.histogram(dfResultado[parVariableResultado], bins=100)
-                pd.DataFrame({"count": count, "division": division[:100]})
+                dfHistograma = pd.DataFrame({"count": count, "division": division[:100]})
                 # Crea un slider para seleccionar el rango de probabilidad
                 rangoPercentiles = [2.5, 5, 25, 50, 75, 95, 97.5]
                 percentiles = np.percentile(dfResultado[parVariableResultado], rangoPercentiles)
