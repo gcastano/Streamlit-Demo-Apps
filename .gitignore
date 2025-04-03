@@ -13,3 +13,4 @@ streamlitChatPDF/chatbotTest.py
 StreamlitMistralAI/*.jp*
 StreamlitMistralAI/*.png
 *.pyc
+streamlitAnalisisPoblacion/unpopulation_dataportal_20250331213650.csv
