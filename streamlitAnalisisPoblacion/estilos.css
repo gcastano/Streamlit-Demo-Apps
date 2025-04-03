@@ -1,0 +1,35 @@
+div[class*='st-key-chart']
+{
+    /* border: 1px solid grey; */
+    overflow:hidden;
+    border-radius: 20px;
+    /* box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); */
+}
+
+.stColumn:has(.stMetric) {
+    overflow:hidden;
+    border-radius: 20px;
+    background-color: [backgroundcolor];
+    padding: 10px;
+    text-align: center;
+    /* border: 1px solid grey; */
+    /* box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); */
+}
+.st-key-container-filtros,
+.st-key-container-rango,
+.stColumn:has(.stDataFrame){    
+    border-radius: 10px;
+    background-color: [backgroundcolor];
+    padding: 1% 10px 10px 10px;    
+    /* border: 1px solid grey; */
+    /* box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); */
+}
+
+.st-key-container-texto {
+    border-radius: 10px;
+    background-color: [backgroundcolor];
+    padding: 1% 10px 10px 10px;    
+    /* border: 1px solid grey; */
+    /* box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); */
+    border: 5px solid yellow;
+}
