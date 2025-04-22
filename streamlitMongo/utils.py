@@ -8,7 +8,9 @@ def local_css(file_name,backgroundcolor=None):
         else:
             st.markdown(f'<style>{f.read()}</style>', unsafe_allow_html=True)
 
-
+def remote_css(url):
+    st.markdown(f'<link href="{url}" rel="stylesheet">', unsafe_allow_html=True)  
+    
 def aplicarFormatoChart(fig,controls=False,legend=False,hoverTemplate=None,backgroundColor=None,textcolor=None):
     fig.update_layout(paper_bgcolor=backgroundColor)
     fig.update_layout(plot_bgcolor=backgroundColor)

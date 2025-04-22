@@ -17,7 +17,8 @@ st.set_page_config(
 backgroundColor = st.get_option('theme.secondaryBackgroundColor')
 textColor = st.get_option('theme.textColor')
 # Aplica estilos CSS personalizados desde el archivo "estilos.css"
-utils.local_css("estilos.css", backgroundColor)
+# utils.local_css("estilos.css", backgroundColor)
+utils.local_css("https://raw.githubusercontent.com/gcastano/Streamlit-Demo-Apps/refs/heads/main/streamlitMongo/estilos.css", backgroundColor)
 
 # Define una paleta de colores para los gráficos
 paleta = ['#97935C', '#95BB76', '#8BE3E1', '#E3E2D8', '#397074', '#41A2E6', '#EDA51B', '#C58CBB', '#32527B', '#793C50']
