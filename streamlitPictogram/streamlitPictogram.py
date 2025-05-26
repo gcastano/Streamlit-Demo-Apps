@@ -257,6 +257,5 @@ def generarPictogramaMultiple(iconos,valores,etiquetas, titulo,colores,tamano=5)
                         icono=iconos[0]                    
                     st.html(f'<i class="fa-solid {icono} fa-{tamano}x fa-fw" style="color: {color};height:50px"></i>')
                     contador+=1
-c1,c2=st.columns(2)
-with c1:
-    generarPictogramaMultiple(["fa-user-graduate","fa-person","fa-cloud"], [37, 60,3],["Graduados","Sin estudio","Otros"], "Graduados", ["#A1C398","#FFAAAA","#90D1CA"],2)
+
+generarPictogramaMultiple(["fa-user-graduate","fa-person","fa-cloud"], [37, 60,3],["Graduados","Sin estudio","Otros"], "Graduados", ["#A1C398","#FFAAAA","#90D1CA"])
