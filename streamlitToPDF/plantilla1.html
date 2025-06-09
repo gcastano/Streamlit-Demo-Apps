@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Dashboard de Ventas</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    @page {
+        size: letter landscape;
+        margin: 1cm;
+    }
+
+    body {
+      font-family: 'Segoe UI', Arial, sans-serif;
+      background: #f4f6fa;
+      margin: 0;
+      padding: 0;
+      color: #222;
+    }
+    .dashboard-container {
+      max-width: 1200px;
+      margin: 32px auto;
+      padding: 24px;
+      background: #fff;
+      border-radius: 16px;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.07);
+    }
+    .dashboard-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 32px;
+    }
+    .dashboard-title {
+      font-size: 2.2em;
+      font-weight: 700;
+      color: #1976d2;
+      letter-spacing: 1px;
+    }
+    .metrics-row {
+      display: flex;
+      gap: 24px;
+      margin-bottom: 36px;
+      flex-wrap: wrap;
+    }
+    .metric-card {
+      flex: 1 1 180px;
+      background: #f9fafb;
+      border-radius: 12px;
+      box-shadow: 0 2px 8px rgba(25, 118, 210, 0.07);
+      padding: 24px 18px;
+      text-align: center;
+      min-width: 180px;
+      transition: box-shadow 0.2s;
+    }
+    .metric-card:hover {
+      box-shadow: 0 4px 16px rgba(25, 118, 210, 0.13);
+    }
+    .metric-title {
+      font-size: 1.1em;
+      color: #555;
+      margin-bottom: 8px;
+      font-weight: 500;
+      letter-spacing: 0.5px;
+    }
+    .metric-value {
+      font-size: 2em;
+      font-weight: bold;
+      color: #1976d2;
+      margin-bottom: 4px;
+    }
+    .metric-delta {
+      font-size: 1em;
+      color: #43a047;
+    }
+    /* Ajuste para 2 gráficos por fila, sin responsividad */
+    .charts-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 28px;
+      margin-top: 16px;
+    }
+    .chart-card {
+      background: #f9fafb;
+      border-radius: 12px;
+      box-shadow: 0 2px 8px rgba(25, 118, 210, 0.05);
+      padding: 18px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .chart-card img {
+      max-width: 100%;
+      max-height: 340px;
+      border-radius: 8px;
+      border: 1px solid #e0e0e0;
+      background: #fafafa;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.03);
+      margin-top: 8px;
+    }
+    /* Eliminar media queries para evitar responsividad */
+    .metrics-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      margin-bottom: 36px;
+    }
+    .metric-card {
+      background: #f9fafb;
+      border-radius: 12px;
+      box-shadow: 0 2px 8px rgba(25, 118, 210, 0.07);
+      padding: 24px 18px;
+      text-align: center;
+      min-width: 0;
+      transition: box-shadow 0.2s;
+    }
+  </style>
+</head>
+<body>
+  <div class="dashboard-container">
+    <div class="dashboard-header">
+      <div class="dashboard-title">Tablero de control de ventas - Tienda Tech</div>
+      <!-- Puedes agregar un logo aquí si lo deseas -->
+    </div>
+    <table style="width:100%; border-collapse:separate; border-spacing:24px 0; margin-bottom:36px;">
+      <tr>
+        <td>
+          <table class="metric-card" style="width:100%;">
+        <tr>
+          <td class="metric-title">Productos vendidos</td>
+        </tr>
+        <tr>
+          <td class="metric-value">[unidades]</td>
+        </tr>
+          </table>
+        </td>
+        <td>
+          <table class="metric-card" style="width:100%;">
+        <tr>
+          <td class="metric-title">Ventas realizadas</td>
+        </tr>
+        <tr>
+          <td class="metric-value">[ventas]</td>
+        </tr>
+          </table>
+        </td>
+        <td>
+          <table class="metric-card" style="width:100%;">
+        <tr>
+          <td class="metric-title">Ventas totales</td>
+        </tr>
+        <tr>
+          <td class="metric-value">[ventastotales]</td>
+        </tr>
+          </table>
+        </td>
+        <td>
+          <table class="metric-card" style="width:100%;">
+        <tr>
+          <td class="metric-title">Utilidades</td>
+        </tr>
+        <tr>
+          <td class="metric-value">[utilidades]</td>
+        </tr>
+          </table>
+        </td>
+        <td>
+          <table class="metric-card" style="width:100%;">
+        <tr>
+          <td class="metric-title">Utilidad porcentual</td>
+        </tr>
+        <tr>
+          <td class="metric-value">[porcentual]</td>
+        </tr>
+          </table>
+        </td>
+      </tr>
+    </table>
+    <table style="width:100%; border-collapse:separate; border-spacing:28px 16px; margin-top:16px;">
+      <tr>
+        <td style="width:50%;">
+          <div class="chart-card">
+            <div class="chart-title"></div>
+            <img src="data:image/png;base64,[GRAFICA1]" alt="Gráfica 1" />
+          </div>
+        </td>
+        <td style="width:50%;">
+          <div class="chart-card">
+            <div class="chart-title"></div>
+            <img src="data:image/png;base64,[GRAFICA2]" alt="Gráfica 2" />
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td style="width:50%;">
+          <div class="chart-card">
+            <div class="chart-title"></div>
+            <img src="data:image/png;base64,[GRAFICA3]" alt="Gráfica 3" />
+          </div>
+        </td>
+        <td style="width:50%;">
+          <div class="chart-card">
+            <div class="chart-title"></div>
+            <img src="data:image/png;base64,[GRAFICA4]" alt="Gráfica 4" />
+          </div>
+        </td>
+      </tr>
+    </table>
+  </div>
+</body>
+</html>
