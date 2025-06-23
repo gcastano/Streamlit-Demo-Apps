@@ -14,3 +14,9 @@ StreamlitMistralAI/*.jp*
 StreamlitMistralAI/*.png
 *.pyc
 streamlitAnalisisPoblacion/unpopulation_dataportal_20250331213650.csv
+StreamlitPandasAI/pandasai.log
+cache/cache_db_0.11.db
+StreamlitPandasAI/streamlitpandasAI.py
+StreamlitPandasAI/cache/cache_db_0.11.db
+StreamlitPandasAI/cache/cache_db_0.11.db.wal
+pandasai.log
