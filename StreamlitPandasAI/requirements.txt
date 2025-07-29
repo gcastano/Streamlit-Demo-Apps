@@ -1,0 +1,6 @@
+langchain_mistralai==0.2.11
+pandas==2.3.1
+pandasai==2.3.0
+pandasai_litellm==0.0.1
+Pillow==11.3.0
+streamlit==1.47.0
