@@ -35,7 +35,7 @@ st.set_page_config(page_title="Programación Lineal con PuLP", layout="wide")
 
 # Título principal de la aplicación que se mostrará en la página.
 st.title("Programación Lineal con PuLP")
-
+st.caption("Creado por [Germán Andrés Castaño Vásquez](https://www.linkedin.com/in/germancastano/) - [YouTube](https://www.youtube.com/@ellocodelosdatos)")
 # ==============================================================================
 # DEFINICIÓN DE LA INTERFAZ DE USUARIO (UI)
 # ==============================================================================
