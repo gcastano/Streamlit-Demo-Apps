@@ -1,0 +1,2 @@
+barcode_generator==0.1rc15
+streamlit==1.48.0
