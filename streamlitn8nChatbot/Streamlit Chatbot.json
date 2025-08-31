@@ -1,0 +1,178 @@
+{
+  "name": "Streamlit Chatbot",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "streamlitchat",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        0,
+        0
+      ],
+      "id": "b172e21e-aa3e-4f71-b108-c743dc1cc564",
+      "name": "Webhook",
+      "webhookId": "b830ebcf-8af8-44d5-9f57-02c1e37560bb"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "={{ $json.body.message }}",
+        "options": {
+          "systemMessage": "Eres un asistente de soporte llamado Pepe y darás información sobre finanzas, marketing y emprendimiento"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 2.2,
+      "position": [
+        208,
+        0
+      ],
+      "id": "c87ea98c-8abe-4563-9a2f-b6680fcda860",
+      "name": "AI Agent"
+    },
+    {
+      "parameters": {
+        "model": "openai/gpt-oss-20b",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGroq",
+      "typeVersion": 1,
+      "position": [
+        80,
+        208
+      ],
+      "id": "545b59ef-e7c1-47c4-b33b-71ac8790d3e1",
+      "name": "Groq Chat Model",
+      "credentials": {
+        "groqApi": {
+          "id": "8YOEKCvG5Ygg6m0m",
+          "name": "Groq account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "sessionIdType": "customKey",
+        "sessionKey": "={{ $json.body.session }}"
+      },
+      "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+      "typeVersion": 1.3,
+      "position": [
+        224,
+        208
+      ],
+      "id": "dd199771-e884-4f51-9cb9-3de11f25535f",
+      "name": "Simple Memory"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.4,
+      "position": [
+        560,
+        0
+      ],
+      "id": "dea8cd87-be84-4350-a04a-868e63affb62",
+      "name": "Respond to Webhook"
+    }
+  ],
+  "pinData": {
+    "Webhook": [
+      {
+        "json": {
+          "headers": {
+            "host": "n8n-service-64bt.onrender.com",
+            "user-agent": "python-requests/2.31.0",
+            "content-length": "66",
+            "accept": "*/*",
+            "accept-encoding": "gzip, br",
+            "cdn-loop": "cloudflare; loops=1",
+            "cf-connecting-ip": "186.87.10.28",
+            "cf-ipcountry": "CO",
+            "cf-ray": "97800fa4ab668dac-MIA",
+            "cf-visitor": "{\"scheme\":\"https\"}",
+            "content-type": "application/json",
+            "render-proxy-ttl": "4",
+            "rndr-id": "588c2503-3629-4bb7",
+            "true-client-ip": "186.87.10.28",
+            "x-forwarded-for": "186.87.10.28, 172.70.254.139, 10.214.142.71",
+            "x-forwarded-proto": "https",
+            "x-request-start": "1756680356847898"
+          },
+          "params": {},
+          "query": {},
+          "body": {
+            "session": "2a7e0bebe7f74d3fae3015ab98c16872",
+            "message": "Hola"
+          },
+          "webhookUrl": "https://n8n-service-64bt.onrender.com/webhook/streamlitchat",
+          "executionMode": "production"
+        }
+      }
+    ]
+  },
+  "connections": {
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Groq Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Simple Memory": {
+      "ai_memory": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Agent": {
+      "main": [
+        [
+          {
+            "node": "Respond to Webhook",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "86298654-e047-42f6-96a2-6dce662f1276",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "bb26ffae9f9d864231da547564a539947a5dfc15d1c4b1aac97d0fb0bf089f94"
+  },
+  "id": "jxAz1vfdBv2etz9o",
+  "tags": []
+}
