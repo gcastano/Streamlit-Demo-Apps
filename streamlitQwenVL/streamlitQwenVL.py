@@ -30,10 +30,10 @@ st.set_page_config(page_title="Consulta con la imagen", layout="wide")
 def consultarImagen(mensaje, urlimagen):
     """
     Envía un mensaje de texto y la URL de una imagen a un modelo de lenguaje multimodal
-    alojado en Hugging Face y muestra la respuesta en la interfaz de Streamlit.
+    alojado en OpenRouter y muestra la respuesta en la interfaz de Streamlit.
 
     Esta función utiliza la librería de OpenAI, pero la redirige a un endpoint de
-    Hugging Face para poder usar modelos de código abierto como Qwen.
+    OpenRouter para poder usar modelos de código abierto como Qwen.
 
     Args:
         mensaje (str): La pregunta o el texto que el usuario quiere enviar al modelo.
@@ -41,7 +41,8 @@ def consultarImagen(mensaje, urlimagen):
     """
     # Se inicializa el cliente de OpenAI.
     # Es crucial notar que estamos cambiando la 'base_url' para apuntar al
-    # router de inferencia de Hugging Face en lugar de la API de OpenAI.
+    # router de inferencia de OpenRouter en lugar de la API de OpenAI.
+    # https://openrouter.ai/
     client = OpenAI(
         base_url="https://openrouter.ai/api/v1",
         # La 'api_key' se obtiene de los secretos de Streamlit (st.secrets),
