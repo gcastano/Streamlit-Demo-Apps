@@ -1,0 +1,55 @@
+[server]
+enableStaticServing = true
+
+[[theme.fontFaces]]
+family = "OpenSans"
+url = "app/static/OpenSans-VariableFont_wdth,wght.ttf"
+
+[[theme.fontFaces]]
+family = "OpenSans"
+url = "app/static/OpenSans-VariableFont_wdth,wght.ttf"
+style = "normal"
+weight = 700
+
+[[theme.fontFaces]]
+family = "OpenSans"
+url = "app/static/OpenSans-VariableFont_wdth,wght.ttf"
+style = "italic"
+weight = 700
+
+[[theme.fontFaces]]
+family = "OpenSans"
+url = "app/static/OpenSans-Italic-VariableFont_wdth,wght.ttf"
+style = "italic"
+weight = 400
+
+[[theme.fontFaces]]
+family = "OpenSans"
+url = "app/static/OpenSans-VariableFont_wdth,wght.ttf"
+style = "normal"
+weight = 400
+
+[theme]
+primaryColor = "#794a39"
+backgroundColor = "#f6eedf"
+secondaryBackgroundColor = "#FCF9F3"
+textColor = "#4f2717"
+linkColor = "#4f2717"
+borderColor = "#d5bdb3"
+showWidgetBorder = true
+baseRadius = "0.75rem"
+buttonRadius = "full"
+font = "OpenSans"
+headingFontWeights = [600,500,500,500,500,500]
+headingFontSizes = ["3rem", "2rem"]
+codeFont = "OpenSans"
+codeFontSize = ".75rem"
+codeBackgroundColor = "#ecebe4"
+showSidebarBorder = true
+chartCategoricalColors = ["#5E3023", "#8B4513", "#D2B48C", "#CD853F", "#F5DEB3", "#DAA520", "#BC8F8F", "#8B0000", "#D2691E", "#FF7F50", "#9370DB", "#228B22", "#8FBC8F", "#654321", "#FFF8DC"]
+
+[theme.sidebar]
+backgroundColor = "#f0f0ec"
+secondaryBackgroundColor = "#ecebe3"
+headingFontSizes = ["1.6rem", "1.4rem", "1.2rem"]
+dataframeHeaderBackgroundColor = "#e4e4e0"
