@@ -1,0 +1,216 @@
+Country Name;Continent_Name;Two_Letter_Country_Code
+Aruba;North America;AW
+Afghanistan;Asia;AF
+Albania;Europe;AL
+Algeria;Africa;DZ
+Angola;Africa;AO
+American Samoa;Oceania;AS
+Andorra;Europe;AD
+Antigua and Barbuda;North America;AG
+United Arab Emirates;Asia;AE
+Azerbaijan;Europe;AZ
+Argentina;South America;AR
+Armenia;Europe;AM
+Australia;Oceania;AU
+Austria;Europe;AT
+Bahamas, The;North America;BS
+Bahrain;Asia;BH
+Bangladesh;Asia;BD
+Burundi;Africa;BI
+Belgium;Europe;BE
+Benin;Africa;BJ
+Barbados;North America;BB
+Burkina Faso;Africa;BF
+Bermuda;North America;BM
+Bulgaria;Europe;BG
+Bhutan;Asia;BT
+Bolivia;South America;BO
+Bosnia and Herzegovina;Europe;BA
+Botswana;Africa;BW
+Belarus;Europe;BY
+Belize;North America;BZ
+Brazil;South America;BR
+Solomon Islands;Oceania;SB
+British Virgin Islands;North America;VG
+Brunei Darussalam;Asia;BN
+Myanmar;Asia;MM
+Central African Republic;Africa;CF
+Canada;North America;CA
+Cambodia;Asia;KH
+Switzerland;Europe;CH
+Cameroon;Africa;CM
+Chile;South America;CL
+Cabo Verde;Africa;CV
+China;Asia;CN
+Cayman Islands;North America;KY
+Cote d'Ivoire;Africa;CI
+Sri Lanka;Asia;LK
+Congo, Dem. Rep.;Africa;CD
+Chad;Africa;TD
+Congo, Rep.;Africa;CG
+Colombia;South America;CO
+Comoros;Africa;KM
+Costa Rica;North America;CR
+Cuba;North America;CU
+Curacao;North America;CW
+Cyprus;Europe;CY
+Czechia;Europe;CZ
+Germany;Europe;DE
+Djibouti;Africa;DJ
+Croatia;Europe;HR
+Dominica;North America;DM
+Denmark;Europe;DK
+Dominican Republic;North America;DO
+Ecuador;South America;EC
+El Salvador;North America;SV
+Egypt, Arab Rep.;Africa;EG
+Equatorial Guinea;Africa;GQ
+Ethiopia;Africa;ET
+Eritrea;Africa;ER
+Spain;Europe;ES
+Estonia;Europe;EE
+Faroe Islands;Europe;FO
+Fiji;Oceania;FJ
+Finland;Europe;FI
+France;Europe;FR
+Micronesia, Fed. Sts.;Oceania;FM
+French Polynesia;Oceania;PF
+Gabon;Africa;GA
+United Kingdom;Europe;GB
+Georgia;Europe;GE
+Ghana;Africa;GH
+Gibraltar;Europe;GI
+Guinea;Africa;GN
+Gambia, The;Africa;GM
+West Bank and Gaza;Asia;PS
+Guinea-Bissau;Africa;GW
+Greece;Europe;GR
+Grenada;North America;GD
+Kiribati;Oceania;KI
+Greenland;North America;GL
+Guatemala;North America;GT
+Guam;Oceania;GU
+Guyana;South America;GY
+Hong Kong SAR, China;Asia;HK
+Honduras;North America;HN
+Haiti;North America;HT
+Hungary;Europe;HU
+Iceland;Europe;IS
+Indonesia;Asia;ID
+India;Asia;IN
+Isle of Man;Europe;IM
+Iran, Islamic Rep.;Asia;IR
+Iraq;Asia;IQ
+Ireland;Europe;IE
+Israel;Asia;IL
+Italy;Europe;IT
+Jamaica;North America;JM
+Japan;Asia;JP
+Kazakhstan;Europe;KZ
+Jordan;Asia;JO
+Kenya;Africa;KE
+Korea, Dem. People's Rep.;Asia;KP
+Korea, Rep.;Asia;KR
+Kyrgyz Republic;Asia;KG
+Kuwait;Asia;KW
+Lao PDR;Asia;LA
+St. Kitts and Nevis;North America;KN
+Lebanon;Asia;LB
+Lesotho;Africa;LS
+Latvia;Europe;LV
+Liberia;Africa;LR
+Libya;Africa;LY
+Liechtenstein;Europe;LI
+Lithuania;Europe;LT
+Luxembourg;Europe;LU
+St. Lucia;North America;LC
+Macao SAR, China;Asia;MO
+Madagascar;Africa;MG
+Malawi;Africa;MW
+Malaysia;Asia;MY
+Maldives;Asia;MV
+Mali;Africa;ML
+Malta;Europe;MT
+Mauritania;Africa;MR
+Mauritius;Africa;MU
+Mexico;North America;MX
+Monaco;Europe;MC
+Mongolia;Asia;MN
+Moldova;Europe;MD
+St. Martin (French part);North America;MF
+Montenegro;Europe;ME
+Morocco;Africa;MA
+Mozambique;Africa;MZ
+Oman;Asia;OM
+Namibia;Africa;NA
+Nauru;Oceania;NR
+Nepal;Asia;NP
+Marshall Islands;Oceania;MH
+Netherlands;Europe;NL
+North Macedonia;Europe;MK
+Sint Maarten (Dutch part);North America;SX
+New Caledonia;Oceania;NC
+Vanuatu;Oceania;VU
+New Zealand;Oceania;NZ
+Northern Mariana Islands;Oceania;MP
+Nicaragua;North America;NI
+Niger;Africa;NE
+Nigeria;Africa;NG
+Norway;Europe;NO
+Palau;Oceania;PW
+Pakistan;Asia;PK
+Panama;North America;PA
+Papua New Guinea;Oceania;PG
+Paraguay;South America;PY
+Peru;South America;PE
+Philippines;Asia;PH
+Poland;Europe;PL
+Portugal;Europe;PT
+Timor-Leste;Asia;TL
+Puerto Rico (US);North America;PR
+Qatar;Asia;QA
+Romania;Europe;RO
+Russian Federation;Europe;RU
+Rwanda;Africa;RW
+St. Vincent and the Grenadines;North America;VC
+San Marino;Europe;SM
+Sao Tome and Principe;Africa;ST
+Saudi Arabia;Asia;SA
+Senegal;Africa;SN
+Sudan;Africa;SD
+Serbia;Europe;RS
+Seychelles;Africa;SC
+Singapore;Asia;SG
+Sierra Leone;Africa;SL
+Slovak Republic;Europe;SK
+Viet Nam;Asia;VN
+Slovenia;Europe;SI
+Somalia, Fed. Rep.;Africa;SO
+South Sudan;Africa;SS
+Suriname;South America;SR
+Eswatini;Africa;SZ
+Sweden;Europe;SE
+Syrian Arab Republic;Asia;SY
+Tajikistan;Asia;TJ
+Thailand;Asia;TH
+Turks and Caicos Islands;North America;TC
+Togo;Africa;TG
+Tonga;Oceania;TO
+Trinidad and Tobago;North America;TT
+Tunisia;Africa;TN
+Turkiye;Europe;TR
+Turkmenistan;Asia;TM
+Tuvalu;Oceania;TV
+Uganda;Africa;UG
+Ukraine;Europe;UA
+Tanzania;Africa;TZ
+United States;North America;US
+Virgin Islands (U.S.);North America;VI
+Uruguay;South America;UY
+Uzbekistan;Asia;UZ
+Venezuela, RB;South America;VE
+Samoa;Oceania;WS
+Yemen, Rep.;Asia;YE
+South Africa;Africa;ZA
+Zambia;Africa;ZM
+Zimbabwe;Africa;ZW
