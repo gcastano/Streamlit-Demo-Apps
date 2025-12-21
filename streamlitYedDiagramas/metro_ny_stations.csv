@@ -1,0 +1,23 @@
+station_id,station_name,borough,lines,is_transfer,latitude,longitude,zone,avg_daily_passengers
+ST01,South Ferry,Manhattan,1,No,40.7017,-74.0132,Manhattan South,15000
+ST02,Whitehall St,Manhattan,1|R,Yes,40.7033,-74.0123,Manhattan South,28000
+ST03,Clark St,Brooklyn,1,No,40.6975,-73.9936,Brooklyn North,12000
+ST04,Borough Hall,Brooklyn,1|2|3,Yes,40.6932,-73.9899,Brooklyn North,42000
+ST05,Fulton St,Manhattan,1|2|A,Yes,40.7104,-74.0076,Manhattan South,75000
+ST06,Wall St,Manhattan,1|2,Yes,40.7075,-74.0113,Manhattan South,38000
+ST07,Times Sq - 42 St,Manhattan,1|2|N|A,Yes,40.7550,-73.9870,Midtown,200000
+ST08,34 St - Penn Station,Manhattan,1|2|A,Yes,40.7506,-73.9935,Midtown,160000
+ST09,14 St,Manhattan,1|2|A,Yes,40.7378,-74.0007,Lower Manhattan,68000
+ST10,Christopher St,Manhattan,1,No,40.7336,-74.0027,Lower Manhattan,18000
+ST11,Houston St,Manhattan,1,No,40.7283,-74.0054,Lower Manhattan,14000
+ST12,Canal St,Manhattan,1|A|N|R,Yes,40.7208,-74.0052,Lower Manhattan,95000
+ST13,West 4 St,Manhattan,A|F,Yes,40.7323,-74.0005,Lower Manhattan,88000
+ST14,Broadway-Lafayette St,Manhattan,F,No,40.7253,-73.9962,Lower Manhattan,26000
+ST15,14 St - Union Sq,Manhattan,F|N,Yes,40.7347,-73.9903,Midtown South,110000
+ST16,23 St,Manhattan,F,No,40.7399,-73.9910,Midtown South,24000
+ST17,34 St - Herald Sq,Manhattan,F|N,Yes,40.7496,-73.9879,Midtown,125000
+ST18,42 St - Bryant Park,Manhattan,F,No,40.7538,-73.9838,Midtown,47000
+ST19,42 St - Port Authority Bus Terminal,Manhattan,A,No,40.7573,-73.9896,Midtown,65000
+ST20,57 St - 7 Ave,Manhattan,N,No,40.7647,-73.9807,Midtown North,31000
+ST21,City Hall,Manhattan,R,No,40.7133,-74.0060,Manhattan South,17000
+ST22,Cortlandt St,Manhattan,R,No,40.7107,-74.0119,Manhattan South,22000

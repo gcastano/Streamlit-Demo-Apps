@@ -1,0 +1,36 @@
+origin_stop_name,destination_stop_name,line,distance_meters,travel_time_est_minutes
+South Ferry,Whitehall St,1,520,2
+Whitehall St,Clark St,1,870,3
+Clark St,Borough Hall,1,910,3
+Borough Hall,Fulton St,1,680,2
+Fulton St,Wall St,1,560,2
+Wall St,South Ferry,1,740,3
+Times Sq - 42 St,34 St - Penn Station,1,1050,4
+34 St - Penn Station,14 St,1,920,3
+14 St,Christopher St,1,640,2
+Christopher St,Houston St,1,510,2
+Houston St,Canal St,1,780,3
+Times Sq - 42 St,34 St - Penn Station,2,1050,4
+34 St - Penn Station,14 St,2,920,3
+14 St,Chambers St,2,1400,5
+Chambers St,Fulton St,2,720,3
+Fulton St,Wall St,2,560,2
+Times Sq - 42 St,42 St - Port Authority Bus Terminal,A,480,2
+42 St - Port Authority Bus Terminal,34 St - Penn Station,A,690,3
+34 St - Penn Station,14 St,A,920,3
+14 St,West 4 St,A,1100,4
+West 4 St,Canal St,A,950,3
+Canal St,Fulton St,A,1250,5
+West 4 St,Broadway-Lafayette St,F,430,2
+Broadway-Lafayette St,14 St - Union Sq,F,820,3
+14 St - Union Sq,23 St,F,620,2
+23 St,34 St - Herald Sq,F,740,3
+34 St - Herald Sq,42 St - Bryant Park,F,690,3
+Canal St,14 St - Union Sq,N,1500,5
+14 St - Union Sq,34 St - Herald Sq,N,880,3
+34 St - Herald Sq,Times Sq - 42 St,N,780,3
+Times Sq - 42 St,57 St - 7 Ave,N,820,3
+Canal St,City Hall,R,640,2
+City Hall,Cortlandt St,R,410,2
+Cortlandt St,Whitehall St,R,530,2
+Whitehall St,Canal St,R,880,3
