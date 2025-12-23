@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Factura</title>
+    <style>
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            color: #333;
+            margin: 0;
+            padding: 40px;
+            background-color: #f8f9fa;
+        }
+
+        .invoice-container {
+            max-width: 800px;
+            margin: auto;
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 40px;
+            border-bottom: 3px solid #1e3a8a;
+            padding-bottom: 20px;
+        }
+
+        .company-info h1 {
+            margin: 0;
+            font-size: 24px;
+            color: #1e3a8a;
+        }
+
+        .company-info p {
+            margin: 2px 0;
+            font-size: 13px;
+            color: #666;
+        }
+
+        .invoice-info {
+            text-align: right;
+            font-size: 13px;
+        }
+
+        .invoice-info strong {
+            font-size: 16px;
+            display: block;
+            color: #1e3a8a;
+        }
+
+        .client-info {
+            margin-bottom: 30px;
+            font-size: 14px;
+            background-color: #e0e7ff;
+            padding: 15px;
+            border-left: 4px solid #1e3a8a;
+            border-radius: 4px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 30px;
+        }
+
+        table thead {
+            background-color: #1e3a8a;
+            color: #fff;
+        }
+
+        table th,
+        table td {
+            padding: 10px;
+            border-bottom: 1px solid #d1d5db;
+            font-size: 13px;
+        }
+
+        table th {
+            text-transform: uppercase;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        table tbody tr:hover {
+            background-color: #f3f4f6;
+        }
+
+        .text-right {
+            text-align: right;
+        }
+
+        .totals {
+            width: 300px;
+            margin-left: auto;
+            font-size: 14px;
+        }
+
+        .totals td {
+            padding: 6px 0;
+        }
+
+        .totals .total {
+            font-weight: bold;
+            font-size: 16px;
+            border-top: 2px solid #1e3a8a;
+            padding-top: 10px;
+            color: #1e3a8a;
+        }
+
+        .footer {
+            margin-top: 40px;
+            font-size: 12px;
+            color: #999;
+            background-color: #f3f4f6;
+            padding: 15px;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="invoice-container">
+
+        <!-- HEADER -->
+        <div class="header">
+            <div class="company-info">
+                <h1>{{ company_name }}</h1>
+                <p>{{ company_address }}</p>
+                <p>{{ company_email }}</p>
+            </div>
+
+            <div class="invoice-info">
+                <strong>Factura</strong>
+                <span>N° {{ invoice_number }}</span><br>
+                <span>Fecha: {{ invoice_date }}</span><br>
+                {% if due_date %}
+                <span>Vence: {{ due_date }}</span>
+                {% endif %}
+            </div>
+        </div>
+
+        <!-- CLIENT -->
+        <div class="client-info">
+            <strong>Facturar a:</strong><br>
+            {{ client_name }}<br>
+            {{ client_email }}
+        </div>
+
+        <!-- ITEMS TABLE -->
+        <table>
+            <thead>
+                <tr>
+                    <th>Fecha</th>
+                    <th>Actividad</th>
+                    <th class="text-right">Horas</th>
+                    <th class="text-right">Tarifa</th>
+                    <th class="text-right">Subtotal</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in items %}
+                <tr>
+                    <td>{{ item.date }}</td>
+                    <td>{{ item.task_executed }}</td>
+                    <td class="text-right">{{ item.hours }}</td>
+                    <td class="text-right">{{ currency }} {{ item.rate }}</td>
+                    <td class="text-right">
+                        {{ currency }} {{ "%.2f"|format(item.hours * item.rate) }}
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <!-- TOTALS -->
+        <table class="totals">
+            <tr>
+                <td>Subtotal</td>
+                <td class="text-right">{{ currency }} {{ subtotal }}</td>
+            </tr>
+            {% if taxes %}
+            <tr>
+                <td>Impuestos</td>
+                <td class="text-right">{{ currency }} {{ taxes }}</td>
+            </tr>
+            {% endif %}
+            <tr class="total">
+                <td>Total</td>
+                <td class="text-right">{{ currency }} {{ total }}</td>
+            </tr>
+        </table>
+
+        <!-- FOOTER -->
+        <div class="footer">
+            {{ invoice_notes }}
+        </div>
+
+    </div>
+</body>
+
+</html>
