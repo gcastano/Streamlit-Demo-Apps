@@ -1,0 +1,6 @@
+mistralai==1.12.4
+pandas==3.0.1
+plotly==6.5.2
+streamlit==1.54.0
+streamlit_lottie==0.0.5
+~treamlit==1.49.1
