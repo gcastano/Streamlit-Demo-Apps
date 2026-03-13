@@ -1,0 +1,131 @@
+[[theme.fontFaces]]
+family = "Poppins"
+url = "app/static/Poppins-Thin.ttf"
+style = "normal"
+weight = "100"
+
+[[theme.fontFaces]]
+family = "Poppins"
+url = "app/static/Poppins-ExtraLight.ttf"
+style = "normal"
+weight = "200"
+
+[[theme.fontFaces]]
+family = "Poppins"
+url = "app/static/Poppins-Light.ttf"
+style = "normal"
+weight = "300"
+
+[[theme.fontFaces]]
+family = "Poppins"
+url = "app/static/Poppins-Regular.ttf"
+style = "normal"
+weight = "400"
+
+[[theme.fontFaces]]
+family = "Poppins"
+url = "app/static/Poppins-Medium.ttf"
+style = "normal"
+weight = "500"
+
+[[theme.fontFaces]]
+family = "Poppins"
+url = "app/static/Poppins-SemiBold.ttf"
+style = "normal"
+weight = "600"
+
+[[theme.fontFaces]]
+family = "Poppins"
+url = "app/static/Poppins-Bold.ttf"
+style = "normal"
+weight = "700"
+
+[[theme.fontFaces]]
+family = "Poppins"
+url = "app/static/Poppins-ExtraBold.ttf"
+style = "normal"
+weight = "800"
+
+[[theme.fontFaces]]
+family = "Poppins"
+url = "app/static/Poppins-Black.ttf"
+style = "normal"
+weight = "900"
+
+[[theme.fontFaces]]
+family = "Poppins"
+url = "app/static/Poppins-ThinItalic.ttf"
+style = "italic"
+weight = "100"
+
+[[theme.fontFaces]]
+family = "Poppins"
+url = "app/static/Poppins-ExtraLightItalic.ttf"
+style = "italic"
+weight = "200"
+
+[[theme.fontFaces]]
+family = "Poppins"
+url = "app/static/Poppins-LightItalic.ttf"
+style = "italic"
+weight = "300"
+
+[[theme.fontFaces]]
+family = "Poppins"
+url = "app/static/Poppins-Italic.ttf"
+style = "italic"
+weight = "400"
+
+[[theme.fontFaces]]
+family = "Poppins"
+url = "app/static/Poppins-MediumItalic.ttf"
+style = "italic"
+weight = "500"
+
+[[theme.fontFaces]]
+family = "Poppins"
+url = "app/static/Poppins-SemiBoldItalic.ttf"
+style = "italic"
+weight = "600"
+
+[[theme.fontFaces]]
+family = "Poppins"
+url = "app/static/Poppins-BoldItalic.ttf"
+style = "italic"
+weight = "700"
+
+[[theme.fontFaces]]
+family = "Poppins"
+url = "app/static/Poppins-ExtraBoldItalic.ttf"
+style = "italic"
+weight = "800"
+
+[[theme.fontFaces]]
+family = "Poppins"
+url = "app/static/Poppins-BlackItalic.ttf"
+style = "italic"
+weight = "900"
+
+[theme]
+base = "dark"
+primaryColor = "#3B66F5" # Azul vibrante de los botones y enlaces
+backgroundColor = "#11141D" # Azul/gris muy oscuro del fondo principal
+secondaryBackgroundColor = "#1C212E" # Color de fondo de las tarjetas y caja inferior
+codeBackgroundColor = "#1C212E"
+textColor = "#ffffff"
+linkColor = "#3B66F5"
+borderColor = "#2A3245" # Borde sutil de las tarjetas
+showWidgetBorder = true
+baseRadius = "0.5rem" # Esquinas redondeadas de las tarjetas
+buttonRadius = "0.5rem" # Los botones son rectángulos redondeados, no "full" (píldora)
+font = "Poppins"
+headingFontWeights = [600, 500, 500, 500, 500, 500]
+headingFontSizes = ["3rem", "2.5rem", "2.25rem", "2rem", "1.5rem"]
+# Colores extraídos: Azul principal, Amarillo (estrellas), Morado (etiqueta Top Rated), Verde (etiqueta New Episodes)
+chartCategoricalColors = ["#3B66F5", "#FFC107", "#9C5BFF", "#2E9D5C"] 
+
+[theme.sidebar]
+backgroundColor = "#0F1219" # Un tono ligeramente más oscuro para contrastar si se usa sidebar
+secondaryBackgroundColor = "#1C212E"
+codeBackgroundColor = "#1C212E"
+borderColor = "#2A3245"
