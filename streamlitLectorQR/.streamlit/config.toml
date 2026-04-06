@@ -1,0 +1,18 @@
+[theme]
+primaryColor = "#2973B2"
+backgroundColor = "#F8FAFC"
+secondaryBackgroundColor = "#D9EAFD"
+textColor = "#3d3a2a"
+linkColor = "#3d3a2a"
+borderColor = "#D9EAFD"
+showWidgetBorder = true
+baseRadius = "0.75rem"
+buttonRadius = "full"
+font = "SpaceGrotesk"
+headingFontWeights = [600,500,500,500,500,500]
+headingFontSizes = ["3rem", "2rem"]
+codeFont = "SpaceMono"
+codeFontSize = ".75rem"
+codeBackgroundColor = "#D9EAFD"
+showSidebarBorder = true
+chartCategoricalColors = ["#0ea5e9", "#059669", "#fbbf24"]

@@ -1,3 +1,4 @@
 {
-    "demoTime.defaultFileType": "json"
+    "demoTime.defaultFileType": "json",
+    "python-envs.defaultEnvManager": "ms-python.python:system"
 }
