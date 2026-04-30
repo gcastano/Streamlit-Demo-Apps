@@ -1,130 +1,137 @@
-import streamlit as st # pip install streamlit
-from google import genai # pip install google-generativeai
+# """
+# ================================================================================
+# TUTORIAL: CLONADOR DE GRÁFICAS CON IA (PYTHON, STREAMLIT, GEMINI Y PANDAS)
+# ================================================================================
+
+# LIBRERÍAS UTILIZADAS Y CÓMO INSTALARLAS:
+# Comando de instalación:
+# pip install streamlit google-genai pandas plotly pillow
+
+# Explicación de librerías:
+# - streamlit: Framework para crear aplicaciones web interactivas con Python de forma rápida.
+# - google.genai: SDK oficial para interactuar con la API de Google Gemini (modelos de IA).
+# - pandas: Librería fundamental para manipulación y análisis de datos en tablas (DataFrames).
+# - plotly.express / graph_objects: Librerías para crear gráficas interactivas de alta calidad.
+# - json: Librería estándar de Python para procesar datos en formato JSON.
+# - re: Librería estándar para usar Expresiones Regulares (búsqueda de patrones en texto).
+# - traceback: Librería estándar para extraer y mostrar errores detallados de ejecución.
+# """
+
+import streamlit as st
+from google import genai
 from google.genai import types
-import pandas as pd # pip install pandas
-import plotly.express as px # pip install plotly
-import plotly.graph_objects as go # pip install plotly
-import json # Librería estándar de Python para trabajar con JSON
-import re # Librería estándar de Python para expresiones regulares
-import traceback # Librería estándar de Python para imprimir trazas de error
+import pandas as pd
+import plotly.express as px
+import plotly.graph_objects as go
+import json
+import re
+import traceback
+
 
 # ─── Configuración de la Página ────────────────────────────────────────────────
-# Configura las opciones de la página de Streamlit.
 st.set_page_config(
-    page_title="Decompilador de Charts · AI Analyzer", # Título que aparece en la pestaña del navegador
-    page_icon="📊", # Ícono que aparece en la pestaña del navegador
-    layout="wide", # Establece el diseño de la página en "wide" para ocupar todo el ancho disponible
+    page_title="Chart Vision · AI Analyzer",
+    page_icon="📊",
+    layout="wide",
 )
 
-# ─── Configuración de la Barra Lateral ──────────────────────────────────────────
+# ─── Configuración de la Barra Lateral (Sidebar) ────────────────────────────────
+# Utilizamos @st.cache_data para que la petición de modelos no se haga cada vez 
+# que interactuamos con la aplicación, ahorrando tiempo y recursos.
 @st.cache_data(show_spinner="Obteniendo modelos...")
 def fetch_available_models(api_key: str):
     """
-    Obtiene los modelos disponibles de la API de Gemini.
-
+    Obtiene la lista de modelos disponibles en la API de Google Gemini.
+    
     Args:
-        api_key (str): La clave de la API de Google Gemini.
-
+        api_key (str): La clave de acceso para la API de Google Gemini.
+        
     Returns:
-        list: Una lista de nombres de modelos Gemini disponibles, o una lista predeterminada en caso de error.
+        list: Una lista ordenada alfabéticamente con los nombres de los modelos.
+              Si falla, devuelve una lista por defecto con modelos conocidos.
     """
     try:
-        # Inicializa el cliente de la API de Gemini con la clave proporcionada.
         client = genai.Client(api_key=api_key)
         models = []
-        # Itera sobre todos los modelos disponibles.
         for model in client.models.list():
-            # Filtra solo los modelos que contienen "gemini" en su nombre.
             if "gemini" in model.name:            
-                name = model.name.replace("models/", "") # Elimina el prefijo "models/"
-                models.append(name) # Añade el nombre del modelo a la lista
-        return sorted(models) # Devuelve la lista de modelos ordenada alfabéticamente
+                name = model.name.replace("models/", "")
+                models.append(name)
+        return sorted(models)
     except Exception:
-        # En caso de error, devuelve una lista predeterminada de modelos.
         return ["gemini-1.5-flash", "gemini-1.5-pro", "gemini-2.0-flash-exp"]
 
-# Define el contenido de la barra lateral de Streamlit.
 with st.sidebar:
-    st.title("📊 Chart Vision") # Título de la aplicación en la barra lateral
-    st.divider() # Un divisor visual
-    st.caption("Chart Vision v1.2") # Versión de la aplicación
-    st.info("Analizador de gráficas inteligente con Google Gemini.") # Mensaje informativo
+    st.title("📊 Chart Vision")
+    st.divider()
+    st.caption("Chart Vision v1.2")
+    st.info("Analizador de gráficas inteligente con Google Gemini.")
 
 # ─── Configuración de Gemini ────────────────────────────────────────────────────
-# Intenta obtener la clave de la API de Gemini desde los secretos de Streamlit.
+# Obtenemos la clave de API desde los secretos de Streamlit (.streamlit/secrets.toml)
 api_key = st.secrets.get("GEMINI_API_KEY", "")
-# Si la clave de la API no está configurada, muestra un error y detiene la ejecución.
 if not api_key:
     st.error("⚠️ Configura `GEMINI_API_KEY` en los Secrets de Streamlit.")
     st.stop()
-# Almacena la clave de la API en el estado de la sesión de Streamlit.
 st.session_state.gemini_api_key = api_key
 
 def get_gemini_client() -> genai.Client:
     """
-    Obtiene una instancia del cliente de la API de Gemini.
-
+    Inicializa y devuelve el cliente de Gemini usando la API key de la sesión.
+    
     Returns:
-        genai.Client: Una instancia del cliente de Gemini.
+        genai.Client: Cliente instanciado para hacer peticiones a la IA.
     """
-    # Retorna un nuevo cliente de Gemini usando la clave de API almacenada en el estado de la sesión.
     return genai.Client(api_key=st.session_state.gemini_api_key)
 
 def _image_part(img_bytes: bytes) -> types.Part:
     """
-    Crea una parte de imagen para la API de Gemini a partir de bytes de imagen.
-
+    Convierte los bytes de una imagen al formato requerido por la API de Gemini (types.Part).
+    Detecta automáticamente el tipo MIME (png, jpeg, webp) leyendo los primeros bytes (Magic Numbers).
+    
     Args:
-        img_bytes (bytes): Los bytes de la imagen.
-
+        img_bytes (bytes): Los datos binarios de la imagen cargada.
+        
     Returns:
-        types.Part: Una parte de contenido de imagen con el tipo MIME detectado.
+        types.Part: Objeto de imagen formateado para Gemini.
     """
-    # Detecta el tipo MIME de la imagen basándose en los primeros bytes.
     if img_bytes[:4] == b'\x89PNG': mime = "image/png"
     elif img_bytes[:2] in (b'\xff\xd8',): mime = "image/jpeg"
     elif img_bytes[:4] == b'RIFF': mime = "image/webp"
-    else: mime = "image/png" # Por defecto, si no se puede detectar, asume PNG.
-    # Crea una parte de contenido a partir de los bytes de la imagen y el tipo MIME.
+    else: mime = "image/png"
     return types.Part.from_bytes(data=img_bytes, mime_type=mime)
 
 # ─── Funciones Auxiliares ───────────────────────────────────────────────────────
 def extract_json(text: str) -> dict:
     """
-    Extrae un objeto JSON de una cadena de texto.
-
+    Extrae un bloque JSON válido de una cadena de texto devolviendo un diccionario de Python.
+    Utiliza expresiones regulares para encontrar el contenido entre las llaves {}.
+    
     Args:
-        text (str): La cadena de texto de la cual extraer el JSON.
-
+        text (str): Texto sin procesar devuelto por la IA.
+        
     Returns:
-        dict: El objeto JSON parseado.
-
-    Raises:
-        ValueError: Si no se encuentra un objeto JSON válido en la cadena.
+        dict: Diccionario de Python parseado desde el JSON.
     """
-    # Busca el primer objeto JSON (delimitado por llaves {}) en la cadena.
     match = re.search(r'\{[\s\S]*\}', text)
-    if not match: 
-        raise ValueError("No se encontró JSON en la respuesta.") # Lanza un error si no se encuentra JSON.
-    return json.loads(match.group()) # Parsea la cadena JSON encontrada a un diccionario Python.
+    if not match: raise ValueError("No se encontró JSON en la respuesta.")
+    return json.loads(match.group())
 
 def extract_code(text: str) -> str:
     """
-    Extrae un bloque de código Python de una cadena de texto.
-
+    Extrae código Python de un bloque de texto formateado con Markdown (```python ... ```).
+    
     Args:
-        text (str): La cadena de texto de la cual extraer el código.
-
+        text (str): Texto sin procesar.
+        
     Returns:
-        str: El bloque de código Python extraído.
+        str: Código Python limpio.
     """
-    # Busca un bloque de código Python delimitado por "```python" o "```".
     match = re.search(r'```(?:python)?\n([\s\S]*?)```', text)
-    if match: 
-        return match.group(1).strip() # Retorna el contenido del bloque de código, eliminando espacios extra.
-    return text.strip() # Si no se encuentra un bloque de código, retorna el texto original sin espacios.
+    if match: return match.group(1).strip()
+    return text.strip()
 
-# Mensaje unificado que se envía a Gemini para el análisis de la imagen.
+# Prompt unificado con instrucciones precisas para que la IA entienda su tarea.
 UNIFIED_PROMPT = """
 Analiza esta imagen de una gráfica/chart con detalle y responde ÚNICAMENTE con un objeto JSON válido (sin texto extra, sin markdown).
 
@@ -147,185 +154,183 @@ Extrae los datos reales visibles para `sample_data`. El código debe ser complet
 
 def analyze_and_generate(client: genai.Client, img_bytes: bytes) -> dict:
     """
-    Envía una imagen a Gemini para un análisis unificado y generación de código.
-
+    Envía la imagen y el prompt unificado a Gemini para análisis y generación de código.
+    
     Args:
         client (genai.Client): El cliente de la API de Gemini.
         img_bytes (bytes): Los bytes de la imagen a analizar.
-
+        
     Returns:
-        dict: El objeto JSON resultante del análisis de Gemini.
+        dict: Diccionario que contiene los datos extraídos y el código Plotly generado.
     """
-    # Envía la imagen y el prompt unificado a Gemini para generar contenido.
     response = client.models.generate_content(
-        model=st.session_state.selected_model, # Usa el modelo seleccionado por el usuario.
+        model=st.session_state.selected_model,
         contents=[
             types.Content(parts=[
-                _image_part(img_bytes), # La imagen como parte del contenido.
-                types.Part.from_text(text=UNIFIED_PROMPT), # El prompt de texto como parte del contenido.
+                _image_part(img_bytes),
+                types.Part.from_text(text=UNIFIED_PROMPT),
             ])
         ],
     )
-    return extract_json(response.text) # Extrae y retorna el JSON de la respuesta.
+    return extract_json(response.text)
 
 def build_default_df(analysis: dict) -> pd.DataFrame:
     """
-    Construye un DataFrame de pandas a partir de los datos de muestra extraídos por Gemini.
-
+    Transforma los datos extraídos por la IA (sample_data) en un DataFrame de pandas.
+    Realiza transformaciones de tipos de datos basándose en el análisis de columnas.
+    
+    TUTORIAL PANDAS:
+    - pd.DataFrame(): Convierte una lista de diccionarios en una tabla.
+    - pd.to_numeric(): Convierte texto a números. El argumento errors="coerce" 
+      reemplaza valores no convertibles con NaN (valores nulos de pandas).
+    - pd.to_datetime(): Convierte texto a formato de fecha/hora.
+    
     Args:
-        analysis (dict): El diccionario de análisis devuelto por Gemini.
-
+        analysis (dict): Diccionario generado por Gemini.
+        
     Returns:
-        pd.DataFrame: Un DataFrame de pandas con los datos de muestra, con tipos de columna ajustados.
+        pd.DataFrame: Un DataFrame listo para ser usado y modificado en la interfaz.
     """
-    sample = analysis.get("sample_data", []) # Obtiene los datos de muestra del análisis.
+    sample = analysis.get("sample_data", [])
     if sample:
-        df = pd.DataFrame(sample) # Crea un DataFrame a partir de los datos de muestra.
-        # Itera sobre las columnas definidas en el análisis para ajustar sus tipos de datos.
+        df = pd.DataFrame(sample)
+        # Bucle para corregir los tipos de datos de cada columna según la IA
         for col in analysis.get("columns", []):
             if col["name"] in df.columns:
                 if col["type"] == "number": 
-                    # Convierte la columna a tipo numérico, forzando errores a NaN.
+                    # Transformación: Casting a valores numéricos
                     df[col["name"]] = pd.to_numeric(df[col["name"]], errors="coerce")
                 elif col["type"] == "date": 
-                    # Convierte la columna a tipo fecha y hora, forzando errores a NaT.
+                    # Transformación: Casting a fechas
                     df[col["name"]] = pd.to_datetime(df[col["name"]], errors="coerce")
         return df
-    return pd.DataFrame() # Retorna un DataFrame vacío si no hay datos de muestra.
+    return pd.DataFrame()
 
-# ─── Interfaz de Usuario (UI) ──────────────────────────────────────────────────
-st.title("Decompilador de Charts: :orange[:material/insert_chart:] :material/arrow_forward: :blue[:material/integration_instructions:]") # Título principal de la aplicación.
-st.caption("✦ Powered by Google Gemini") # Subtítulo indicando la tecnología usada.
-st.write("Sube una imagen de cualquier gráfica y la IA la analizará, extraerá sus datos y generará código Plotly para reproducirla.") # Descripción breve.
+# ─── Interfaz de Usuario (UI) ───────────────────────────────────────────────────
+st.title("Chart Vision")
+st.caption("✦ Powered by Google Gemini")
+st.write("Sube una imagen de cualquier gráfica y la IA la analizará, extraerá sus datos y generará código Plotly para reproducirla.")
 
-# Indicadores de pasos usando columnas y "cards".
-cols = st.columns(4) # Crea 4 columnas para los pasos.
+# Tarjetas indicadoras de los pasos del proceso utilizando columnas de Streamlit
+cols = st.columns(4)
 steps = [
-    ("01 ─ CARGAR", "Cargar Imagen", "Sube PNG, JPG o WEBP",":material/upload:"),
-    ("02 ─ ANALIZAR", "Análisis con IA", "Gemini extrae los datos",":material/psychology:"),
-    ("03 ─ EDITAR", "Editar Datos", "Ajusta en el editor",":material/edit:"),
-    ("04 ─ RENDERIZAR", "Generar Gráfica", "Visualiza con Plotly",":material/visibility:")
+    ("01 ─ UPLOAD", "Cargar Imagen", "Sube PNG, JPG o WEBP"),
+    ("02 ─ ANALYZE", "Análisis con IA", "Gemini extrae los datos"),
+    ("03 ─ EDIT", "Editar Datos", "Ajusta en el editor"),
+    ("04 ─ RENDER", "Generar Gráfica", "Visualiza con Plotly")
 ]
-# Itera sobre los pasos para mostrarlos en las columnas.
-for i, (num, title, desc, icon) in enumerate(steps):
+for i, (num, title, desc) in enumerate(steps):
     with cols[i]:
-        with st.container(border=True): # Cada paso está dentro de un contenedor con borde.
-            colscard = st.columns([1, 4],vertical_alignment="center") # Crea dos columnas dentro del contenedor para el número y el texto.
-            with colscard[0]:
-                st.write(f"## :blue[{icon}]") # Icono para cada paso.
-            with colscard[1]:   
-                st.write(f"**{num}**") # Número del paso.
-                st.write(f"#### {title}") # Título del paso en negritas.
-                st.caption(desc) # Descripción del paso.
+        with st.container(border=True):
+            st.caption(num)
+            st.write(f"**{title}**")
+            st.write(desc)
 
-st.divider() # Un divisor visual.
+st.divider()
 
 # ─── Paso 1: Carga de Imagen ────────────────────────────────────────────────────
-st.header("01 · Imagen de la Gráfica", divider="blue") # Encabezado para el primer paso.
+st.header("01 · Imagen de la Gráfica", divider="blue")
 
-# Widget para subir archivos.
 uploaded_file = st.file_uploader("Sube una imagen", type=["png", "jpg", "jpeg", "webp"], label_visibility="collapsed")
 
-# Si se ha subido un archivo:
 if uploaded_file:
-    img_bytes = uploaded_file.read() # Lee los bytes de la imagen.
-    c1, c2 = st.columns([1, 1]) # Crea dos columnas para la imagen y los controles.
+    img_bytes = uploaded_file.read()
+    c1, c2 = st.columns([1, 1])
     with c1:
-        st.image(img_bytes, caption="Imagen cargada", use_container_width=True) # Muestra la imagen subida.
+        st.image(img_bytes, caption="Imagen cargada", use_container_width=True)
     with c2:
         with st.container(border=True):
-            st.success("✓ Imagen lista para analizar", icon=":material/check_circle:") # Mensaje de éxito.
+            st.success("✓ Imagen lista para analizar", icon=":material/check_circle:")
             st.write("La imagen será procesada para detectar el tipo de gráfica, ejes, etiquetas y datos visibles.")
             
-            # Carga los modelos disponibles y permite al usuario seleccionar uno.
+            # Selección de modelo dinámico
             model_options = fetch_available_models(st.session_state.gemini_api_key)
             st.session_state.selected_model = st.selectbox("Modelo de IA", options=model_options, index=0, key="model_sel")
-            # Botón para iniciar el análisis con Gemini.
             analyze_btn = st.button("🔍 Analizar con Gemini", use_container_width=True, type="primary")
 
-    # ─── Paso 2: Análisis ───────────────────────────────────────────────────────
-    # Si se pulsa el botón de analizar o ya hay un análisis en el estado de la sesión:
+    # ─── Paso 2: Análisis ────────────────────────────────────────────────────────
+    # Guardamos los resultados en st.session_state para que no se pierdan al recargar la página
     if analyze_btn or "analysis" in st.session_state:
         if analyze_btn:
-            with st.spinner("Analizando y generando código..."): # Muestra un spinner mientras se analiza.
+            with st.spinner("Analizando y generando código..."):
                 try:
-                    # Llama a la función de análisis y generación de código.
                     result = analyze_and_generate(get_gemini_client(), img_bytes)                    
-                    st.session_state.analysis = result # Almacena el resultado del análisis.
-                    st.session_state.img_bytes = img_bytes # Almacena los bytes de la imagen.
-                    # Almacena el código generado.
+                    st.session_state.analysis = result
+                    st.session_state.img_bytes = img_bytes
+                    # Guardar código generado desde el análisis
                     code = result.get("plotly_code", "")
                     st.session_state.generated_code = code
-                    # Actualiza el estado del área de texto para que coincida.
+                    # Actualizar explícitamente el estado del área de texto
                     st.session_state.plotly_code_area = code
                 except Exception as e:
-                    st.error(f"Error: {e}") # Muestra un error si falla el análisis.
+                    st.error(f"Error: {e}")
                     st.stop()
 
-        analysis = st.session_state.analysis # Recupera el análisis del estado de la sesión.
+        analysis = st.session_state.analysis
         st.divider()
-        st.header("02 · Resultado del Análisis", divider="blue") # Encabezado para el paso de resultados.
+        st.header("02 · Resultado del Análisis", divider="blue")
         
         with st.container(border=True):
-            # Muestra el tipo de gráfica, título y descripción.
             st.badge(analysis.get("chart_type", "unknown").upper(), icon="📊")
             st.subheader(analysis.get("title", "Sin título"))
             st.write(analysis.get("description", ""))
             
-            m1, m2, m3 = st.columns(3) # Muestra métricas clave.
+            m1, m2, m3 = st.columns(3)
             m1.metric("Eje X", analysis.get("x_label", "—"))
             m2.metric("Eje Y", analysis.get("y_label", "—"))
             m3.metric("Series", len(analysis.get("series", [])))
 
-        # ─── Paso 3: Editor de Datos ───────────────────────────────────────────────
+        # ─── Paso 3: Editor de Datos (Pandas en acción) ───────────────────────────
         st.divider()
-        st.header("03 · Editor de Datos", divider="blue") # Encabezado para el editor de datos.
-        # Si no hay un DataFrame editado o se acaba de realizar un nuevo análisis:
+        st.header("03 · Editor de Datos", divider="blue")
+        # Si no existe el DataFrame en sesión o si pulsamos el botón analizar, construimos uno nuevo
         if "df_edited" not in st.session_state or analyze_btn:
-            # Construye el DataFrame por defecto a partir del análisis.
             st.session_state.df_edited = build_default_df(analysis)
 
-        # Permite al usuario editar el DataFrame en Streamlit.
+        # st.data_editor nos permite interactuar y modificar el DataFrame de Pandas directamente en la UI
         st.session_state.df_edited = st.data_editor(st.session_state.df_edited, num_rows="dynamic", use_container_width=True)
 
-        # ─── Paso 4: Generación de Código ──────────────────────────────────────────
+        # ─── Paso 4: Generación de Código ─────────────────────────────────────────
         st.divider()
-        st.header("04 · Código Generado", divider="blue") # Encabezado para el código generado.
+        st.header("04 · Código Generado", divider="blue")
         
-        # Área de texto para mostrar y editar el código Plotly.
+        # Área de texto vinculada a la sesión para editar el código generado por Gemini
         st.text_area(
             "Edita el código si es necesario",
             height=300,
-            key="plotly_code_area" # Clave para vincular al estado de la sesión.
+            key="plotly_code_area"
         )
-        # Sincroniza el código generado con el contenido del área de texto.
+        # Mantenemos sincronizado el generated_code para el Paso 5
         st.session_state.generated_code = st.session_state.plotly_code_area
 
 
-        # ─── Paso 5: Visualización ──────────────────────────────────────────────
+        # ─── Paso 5: Renderización de la Gráfica ─────────────────────────────────
         st.divider()
-        st.header("05 · Visualización", divider="blue") # Encabezado para la visualización.
-        # Botón para ejecutar el código y mostrar la gráfica.
+        st.header("05 · Visualización", divider="blue")
         if st.button("▶ Ejecutar y Mostrar", use_container_width=True, type="primary"):
             try:
-                df = st.session_state.df_edited # Obtiene el DataFrame editado.
-                # Define las variables locales disponibles para el código a ejecutar.
+                # Recuperamos el DataFrame modificado
+                df = st.session_state.df_edited
+                # Creamos un entorno virtual (diccionario local_vars) pasando el DataFrame 
+                # y las librerías necesarias para que la función exec() pueda ejecutarlas
                 local_vars = {"df": df, "px": px, "go": go, "pd": pd}
-                # Ejecuta el código Plotly generado o editado.
                 exec(st.session_state.generated_code, local_vars)
-                fig = local_vars.get("fig") # Intenta obtener la figura generada.
+                
+                # Rescatamos la figura creada dentro del exec()
+                fig = local_vars.get("fig")
                 if fig:
-                    st.plotly_chart(fig, use_container_width=True) # Muestra la gráfica de Plotly.
+                    st.plotly_chart(fig, use_container_width=True)
                     st.divider()
-                    st.subheader("Comparación") # Sección de comparación.
+                    st.subheader("Comparación")
                     cc1, cc2 = st.columns(2)
-                    cc1.image(img_bytes, caption="Original") # Muestra la imagen original.
-                    cc2.plotly_chart(fig, use_container_width=True, key="comp") # Muestra la gráfica generada para comparación.
+                    cc1.image(img_bytes, caption="Original")
+                    cc2.plotly_chart(fig, use_container_width=True, key="comp")
                 else:
-                    st.error("No se generó la variable `fig`.") # Error si no se generó la figura.
+                    st.error("No se generó la variable `fig`.")
             except Exception as e:
-                st.error(f"Error de ejecución: {e}") # Muestra errores de ejecución.
-                with st.expander("Traceback"): st.code(traceback.format_exc()) # Expansor para ver la traza de error.
+                st.error(f"Error de ejecución: {e}")
+                # Mostramos la traza exacta del error usando traceback
+                with st.expander("Traceback"): st.code(traceback.format_exc())
 
 else:
-    st.info("Sube una imagen para comenzar el análisis.", icon=":material/upload:") # Mensaje inicial si no hay imagen.
+    st.info("Sube una imagen para comenzar el análisis.", icon=":material/upload:")
