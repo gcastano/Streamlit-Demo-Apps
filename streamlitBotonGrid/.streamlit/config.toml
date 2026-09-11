@@ -1,0 +1,18 @@
+[theme]
+base = "light"
+primaryColor = "#256abf"
+backgroundColor = "#FFFFFF"
+secondaryBackgroundColor = "#F0F4FA"
+textColor = "#262730"
+font = "sans-serif"
+baseRadius = "medium"
+borderColor = "#E8EAED"
+showWidgetBorder = true
+dataframeHeaderBackgroundColor = "#E8EDF2"
+dataframeBorderColor = "#E8EAED"
+
+# Rampa secuencial azul (mismo hue que el choropleth) para gráficos nativos de Streamlit
+chartSequentialColors = [
+    "#cde2fb", "#b7d3f6", "#9ec5f4", "#86b6ef", "#6da7ec",
+    "#5598e7", "#3987e5", "#2a78d6", "#256abf", "#184f95",
+]
