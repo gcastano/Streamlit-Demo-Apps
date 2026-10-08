@@ -1,0 +1,8 @@
+streamlit
+pandas
+numpy
+sktime
+plotly
+statsmodels
+openpyxl
+pmdarima
