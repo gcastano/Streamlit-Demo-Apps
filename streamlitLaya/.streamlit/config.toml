@@ -1,0 +1,64 @@
+[server]
+enableStaticServing = true
+
+[[theme.fontFaces]]
+family = "Inter"
+url = "app/static/Inter_18pt-Regular.ttf"
+style = "normal"
+weight = 400
+
+[[theme.fontFaces]]
+family = "Inter"
+url = "app/static/Inter_18pt-Medium.ttf"
+style = "normal"
+weight = 500
+
+[[theme.fontFaces]]
+family = "Inter"
+url = "app/static/Inter_18pt-SemiBold.ttf"
+style = "normal"
+weight = 600
+
+[[theme.fontFaces]]
+family = "Inter"
+url = "app/static/Inter_18pt-Bold.ttf"
+style = "normal"
+weight = 700
+
+[[theme.fontFaces]]
+family = "JetBrainsMono"
+url = "app/static/JetBrainsMono-Regular.ttf"
+style = "normal"
+weight = 400
+
+[[theme.fontFaces]]
+family = "JetBrainsMono"
+url = "app/static/JetBrainsMono-Medium.ttf"
+style = "normal"
+weight = 500
+
+[[theme.fontFaces]]
+family = "JetBrainsMono"
+url = "app/static/JetBrainsMono-Bold.ttf"
+style = "normal"
+weight = 700
+
+[theme]
+# 🌙 DARK MODE DEVELOPER PALETTE 🌙
+primaryColor = "#a855f7"             # Purple-500 - vibrant, code-like accent
+backgroundColor = "#0d1117"          # GitHub-like dark background - developer comfort
+secondaryBackgroundColor = "#161b22" # Slightly lighter - cards and sections
+textColor = "#f0f6fc"                # Light blue-white - easy on eyes
+linkColor = "#58a6ff"                # GitHub-like blue - familiar developer color
+borderColor = "#30363d"              # Dark gray borders - subtle definition
+showWidgetBorder = true
+baseRadius = "0.375rem"              # Moderate rounding - modern feel
+font = "Inter"                       # Inter - clean, developer-friendly
+headingFont = "Inter"                # Consistent hierarchy
+codeFont = "JetBrainsMono"           # JetBrains Mono - popular with developers
+codeBackgroundColor = "#21262d"      # Darker code background - clear distinction
+showSidebarBorder = true
+
+[theme.sidebar]
+backgroundColor = "#161b22"          # Darker sidebar - VS Code style
+secondaryBackgroundColor = "#21262d" # Code-like sections
